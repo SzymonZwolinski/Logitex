@@ -8,12 +8,15 @@
         <h1>Logowanie</h1>  
         <form name="f1" action = "authentication.php" onsubmit = "return validation()" method = "POST">  
             <p>  
+
                 <label> Nazwa uzytkownika: </label>  
                 <input type = "text" id ="user" name  = "user" />  
+
             </p>  
             <p>  
-                <label> Haslo: </label>  
-                <input type = "password" id ="pass" name  = "pass" />  
+                <label> Hasło: </label>  
+                <input type = "password" id ="pass" name  = "pass" /> 
+
             </p>  
             <p>     
                 <input type =  "submit" id = "btn" value = "Zaloguj" />  

@@ -14,7 +14,8 @@
         $count = mysqli_num_rows($result);  
           
         if($count == 1){  
-            echo "<h1><center> Zalogowano pomyslnie </center></h1>";  
+            echo "<h1><center> Zalogowano pomyslnie </center></h1>";
+            header("Location: ../Menu/menu.html");
         }  
         else{  
             echo "<h1> Logowanie zakonczone niepowodzeniem. Nieprawidlowa nazwa uzytkownika lub haslo.</h1>";  
