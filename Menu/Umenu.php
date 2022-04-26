@@ -23,7 +23,7 @@ if(!isset($_SESSION["permission"]))
     <input type="button" value="Utwórz zlecenie" id="utwzl" onclick="alert('Utworzenie Zlecenia')">
     <input type="button" value="Edycja zlecenia" id="edzl" onclick="alert('Edycja zlecenia')">
     
-    <a href="../login/logout.php" class="wyloguj">Wyloguj</a>
+    <a href="../login/logout.php" id="wyloguj">Wyloguj</a>
     </div>
 
 </body>

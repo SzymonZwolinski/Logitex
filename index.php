@@ -1,18 +1,44 @@
-<html>
-  <head>
-    <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
-    <script src="./jv.jsx"></script>
-    <link rel="stylesheet" href="./style.css">
-  </head>
+<!DOCTYPE HTML>
+    <script src="https://jesstelford.github.io/aframe-click-drag-component/build.js"></script>
   <body>
-      <!---ctrl+alt+i w przegladarce tryb inspekcji-->
-      <a-scene>
-        <a-box position="-1 0.5 -3" rotation="0 45 0" color="#4CC3D9"></a-box>
-        <a-sphere position="0 1.25 -5" radius="1.25" color="#EF2D5E"></a-sphere>
-        <a-cylinder position="1 0.75 -3" radius="0.5" height="1.5" color="#FFC65D"></a-cylinder>
-        <a-plane position="0 0 -4" rotation="-90 0 0" width="4" height="4" color="#7BC8A4"></a-plane>
-        <a-sky color="#ECECEC"></a-sky>
-      </a-scene>
+     <a-scene>
+      <a-box
+        click-drag
+        dynamic-body="mass: 0.01"
+        position="0 3 -1"
+        color="#EF2D5E"
+      >
+      </a-box>
+      
+      <a-box
+        click-drag
+        dynamic-body="mass: 20"
+        position="5 4 -1"
+        color="#EF2D5E"
+      >
+      </a-box>
+      
+      <a-plane static-body rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
+      <a-sky color="#ECECEC"></a-sky>
+
+      <a-entity position="0 0 3.8">
+        <a-camera look-controls-enabled="false" keyboard-controls="fpsMode: true"></a-camera>
+      </a-entity>
+      <script>
+        var draggable = document.querySelector('[click-drag]');
+          draggable.addEventListener('dragstart', function(dragInfo) {
+          draggable.components['dynamic-body'].pause();
+          });
+        draggable.addEventListener('dragend', function(dragInfo) {
+          var x = dragInfo.detail.velocity.x;
+          var y = dragInfo.detail.velocity.y;
+          var z = dragInfo.detail.velocity.z;
+
+          draggable.components['dynamic-body'].play();
+          draggable.body.velocity.set(x, y, z);
+          console.log('drag end', dragInfo.detail.velocity);
+        });
+      </script>
+    </a-scene>
   </body>
-  
 </html>
