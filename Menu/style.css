@@ -1,6 +1,15 @@
 body{
     background-color: black;
 }
+#wyloguj
+{
+    -webkit-appearance: button;
+    -moz-appearance: button;
+    appearance: button;
+
+    text-decoration: none;
+    color: initial;
+}
 .btn
 {
     border: 5px royalblue solid;  
@@ -19,7 +28,7 @@ box-shadow: 0 5px #666;
 transform: translateY(4px);
 }
 
-#utwzl, #edzl, #wyloguj
+#utwzl, #edzl .wyloguj
 {
     display: inline-block;
     border-radius: 10px;
