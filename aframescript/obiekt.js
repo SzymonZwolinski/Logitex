@@ -6,8 +6,9 @@ AFRAME.registerComponent('movable', {
         
     },
 
-    init: function () {
+    init: function (e) {
       // Do something when component first attached.
+      console.log("Pojawil sie obiekt" );
     },
 
     update: function () {
@@ -17,61 +18,58 @@ AFRAME.registerComponent('movable', {
 
     remove: function () {
       // Do something the component or its entity is detached.
+      var draggable = document.querySelectorAll('[click-drag]');
+      draggable.forEach(function(clickdrag)
+      {
+          clickdrag.removeEventListener('dragstart');
+      });
+
+      var colliders =document.querySelectorAll('[collider]');
+      colliders.forEach(function(collider)
+      {
+          collider.removeEventListener('collide');
+      });
     },
 
     tick: function (time, timeDelta) {
-
-        var collider =document.querySelectorAll('a-box');
-        collider.forEach(function(_collider)
-        {
-            _collider.addEventListener('collide',function(evt)
-            {
-                _collider.setAttribute('color','#03fc1c');
-                console.log("Kolizja");
-                
-            });
-        });
+        kolizja();
         move();
 
       
     },
     tock: function(time,timeDelta)
     {
-         
+       _collider.setAttribute('material','color','blue');
     },
     
 });
-/*
-AFRAME.registerComponent('paleta', {
-    schema: {
-      color: {type: 'color', default: '#EF2D5E'},
-      //clickDrag:{type:'click-drag', default:'true'},
-      dynamicBody:{type:'dynamic-body',default:'mass: 20'},
-      position:{type:'position',default:'5 4 -1'}
 
-    },
-    init: function()
-    {
-        console.log("Utworzono Obiekt");
-    }
-  });*/
 
 function AddObject()
 {
+  //wybór obiektow
   var scene = document.querySelector('a-scene');
   var newObj = document.createElement('a-entity');
-  //var weight = "mass: 10";
-  //newObj.setAttribute('paleta','');
+
+  //kwadrat i rozmiar
   newObj.setAttribute('geometry','primitive:box');
+  newObj.setAttribute('width','0.5');
+  newObj.setAttribute('heigh','0.5');
+  newObj.setAttribute('depth','0.5');
+
+  //parametry
   newObj.setAttribute('click-drag','');
-  newObj.setAttribute('dynamic-body','mass:20');
-  newObj.setAttribute('color','#EF2D5E');
+  newObj.setAttribute('dynamic-body','mass:10000');
+  newObj.setAttribute('material','color','blue');
   newObj.setAttribute('position',{x:5, y:4, z:-1});
-  
-  newObj.setAttribute('collider','');
+  newObj.setAttribute('movable','');
   newObj.setAttribute('id',incr());
-  //newObj.setAttribute('event-set__enter','_event: mouseenter; color: #8FF7FF');
-  //newObj.setAttribute('event-set__leave','_event: mouseleave; color: #EF2D5E');
+
+  newObj.setAttribute('collider','');
+  //newObj.setAttribute('event-set__enter','_event: mouseenter; material.color: #8FF7FF');
+  //newObj.setAttribute('event-set__leave','_event: mouseleave; material.color: #EF2D5E');
+
+  //dodanie do sceny
   scene.appendChild(newObj);
 
   
@@ -92,20 +90,47 @@ function move()
     {
         clickdrag.addEventListener('dragend', function(dragInfo) 
         {
-            //console.log(dragInfo.detail.velocity.y);
-            var x = dragInfo.detail.velocity.x;
-            var y = dragInfo.detail.velocity.y;
-            var z = dragInfo.detail.velocity.z;
-            //console.log(x);
+
+            var position = clickdrag.getAttribute('position');
+            //blokada przed wywaleniem pod mape
+            if(position.y <0)
+            {
+                var size = clickdrag.getAttribute('heigh');
+                clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
+            }
+            
             clickdrag.components['dynamic-body'].play();
-            clickdrag.body.velocity.set(x, y, z);
-            //clickdrag.setAttribute('velocity',{x, y});
-            //x=0;
-            //y=0;
-            //z=0;
-            //console.log('drag end', dragInfo.detail.velocity);
+            //zerowanie prędkosci rzucenia
+            clickdrag.body.velocity.set(0,0,0);
+            clickdrag.body.angularVelocity.set(0,0,0);
+            clickdrag.body.vlambda.set(0,0,0);
+            clickdrag.body.wlambda.set(0,0,0);
+ 
         });
     });
+}
+
+function kolizja()
+{
+
+    var colliders =document.querySelectorAll('[collider]');
+    colliders.forEach(function(collider)
+    {
+
+        collider.addEventListener('collide',function(evt)
+        {
+            //nie sprawdzac console.log id bo wywala przegladarke
+           if(evt.detail.body.id > 0)
+           {
+                collider.setAttribute('material','color','red');
+           }
+           else
+           {
+               collider.setAttribute('material','color','blue');
+           }
+        });
+    });
+
 }
 
 var incr = (function () {

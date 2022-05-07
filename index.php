@@ -9,12 +9,12 @@
     <div id ="ui">
     <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject()">
     </div>
-    <a-scene movable>
+    <a-scene>
 
       <a-plane static-body rotation="-90 0 0" width="200" height="200" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
       <a-entity position="0 0 3.8">
-        <a-camera look-controls-enabled="false" keyboard-controls="fpsMode: true" dynamic-body><a-entity cursor="rayOrigin: mouse;"></a-entity></a-camera>
+        <a-camera look-controls-enabled="false" keyboard-controls="fpsMode: true" dynamic-body ></a-camera>
       </a-entity>
 
     </a-scene>
