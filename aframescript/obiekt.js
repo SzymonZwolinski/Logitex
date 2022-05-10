@@ -1,14 +1,19 @@
 //import "./Collider.js"
 
+var obj;
+var objtab =new Array();
 
 AFRAME.registerComponent('movable', {
     schema: {
         
     },
 
-    init: function (e) {
+    init: function () {
       // Do something when component first attached.
-      console.log("Pojawil sie obiekt" );
+      obj = document.getElementById(incr2());
+      objtab.push(obj);
+      console.log("Pojawil sie obiekt", obj  );
+      console.log(objtab);
     },
 
     update: function () {
@@ -18,24 +23,16 @@ AFRAME.registerComponent('movable', {
 
     remove: function () {
       // Do something the component or its entity is detached.
-      var draggable = document.querySelectorAll('[click-drag]');
-      draggable.forEach(function(clickdrag)
-      {
-          clickdrag.removeEventListener('dragstart');
-      });
-
-      var colliders =document.querySelectorAll('[collider]');
-      colliders.forEach(function(collider)
-      {
-          collider.removeEventListener('collide');
-      });
+     
+          obj.removeEventListener('dragstart');
+          obj.removeEventListener('collide');
     },
 
-    tick: function (time, timeDelta) {
+    tick: function (t, dt) {
+        
         kolizja();
         move();
-
-      
+        
     },
     tock: function(time,timeDelta)
     {
@@ -59,7 +56,7 @@ function AddObject()
 
   //parametry
   newObj.setAttribute('click-drag','');
-  newObj.setAttribute('dynamic-body','mass:10000');
+  newObj.setAttribute('dynamic-body','mass:90000');
   newObj.setAttribute('material','color','blue');
   newObj.setAttribute('position',{x:5, y:4, z:-1});
   newObj.setAttribute('movable','');
@@ -98,6 +95,27 @@ function move()
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
+            if(position.x <-10)
+            {
+                var size = clickdrag.getAttribute('width');
+                clickdrag.setAttribute('position',{x: -10+(size+0.01), y: position.y, z: position.z});
+            }
+            if(position.x >10)
+            {
+                var size = clickdrag.getAttribute('width');
+                clickdrag.setAttribute('position',{x: 10-(size-0.01), y: position.y, z: position.z});
+            }
+            if(position.z >10)
+            {
+                var size = clickdrag.getAttribute('depth');
+                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: 10-(size-0.01)});
+            }
+            if(position.z <-10)
+            {
+                console.log(position.z);
+                var size = clickdrag.getAttribute('depth');
+                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: -10+(size+0.01)});
+            }
             
             clickdrag.components['dynamic-body'].play();
             //zerowanie prędkosci rzucenia
@@ -134,6 +152,12 @@ function kolizja()
 }
 
 var incr = (function () {
+    var i = 1;
+    return function () {
+        return i++;
+    }
+})();
+var incr2 = (function () {
     var i = 1;
     return function () {
         return i++;
