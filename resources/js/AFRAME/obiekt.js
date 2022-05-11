@@ -95,10 +95,10 @@ function move()
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
-            if(position.x <-10)
+            if(position.x >-10)
             {
                 var size = clickdrag.getAttribute('width');
-                clickdrag.setAttribute('position',{x: -10+(size+0.01), y: position.y, z: position.z});
+                clickdrag.setAttribute('position',{x: 0, y: position.y, z: position.z});
             }
             if(position.x >10)
             {
@@ -114,7 +114,7 @@ function move()
             {
                 console.log(position.z);
                 var size = clickdrag.getAttribute('depth');
-                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: -10+(size+0.01)});
+                clickdrag.setAttribute('position',{x: position.x, y: position.y, z:0});
             }
             
             clickdrag.components['dynamic-body'].play();

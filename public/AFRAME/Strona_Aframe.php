@@ -3,7 +3,7 @@
     <!--Aframe event--->
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
 
-    <script src="./aframescript/obiekt.js">
+    <script src="../../resources/js/AFRAME/obiekt.js">
     </script>
   <body>
     <div id ="ui">
