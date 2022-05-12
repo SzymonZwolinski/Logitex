@@ -79,6 +79,24 @@ function AddObject()
   
 }
 
+function DelObject(objID)
+{
+    console.log(objID);
+    var scene = document.querySelector('a-scene');
+    var rmObj = document.getElementById(objID);
+    if(rmObj!=null)
+    {
+        console.log(rmObj);
+        scene.removeChild(rmObj);
+    }
+    else
+    {
+        alert("Obiekt nie istnieje!");
+    }
+   // scene.removeChild(Obj);
+    //Obj.removeChild(scene);
+}
+
 function move()
 {
     var draggable = document.querySelectorAll('[click-drag]');

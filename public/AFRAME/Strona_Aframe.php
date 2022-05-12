@@ -10,10 +10,8 @@
     <div id ="ui">
     <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject()">
 
-    <form action="#" onsubmit="AddObject()">
-      <input type="text" class="inputField">
-      <input type="submit" name="del" value="Skasuj obiekt" >
-    </form>
+      <input type="number" name="nr" id="nr" >
+      <input type="submit" name="del" value="Skasuj obiekt" onclick="DelObject(document.getElementById('nr').value)" >
 
     <input type="button" name="kamera2" value="Zamien Kamere" onclick="ChCam()">  
   </div>

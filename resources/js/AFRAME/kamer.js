@@ -1,7 +1,7 @@
 function ChCam()
 {
 	/* Funckja zamieniająca kamery */
-	/* Po włączeniu kamery 2  */
+	/*   */
 	var first_cam = document.querySelector('[cam1]');
 	console.log(first_cam.getAttribute('camera'));
 	var second_cam = document.querySelector('[cam2]');
