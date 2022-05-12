@@ -7,6 +7,18 @@ var szerokosc = 1;
 var wysokosc = 1;
 var glebokosc = 1;
 
+
+AFRAME.registerComponent('cursor-listener', {
+    init: function () {
+      var lastIndex = -1;
+      this.el.addEventListener('click', function (evt) {
+
+       document.getElementById('nr').value = evt.target.id;
+      });
+    }
+  });
+
+
 AFRAME.registerComponent('movable', {
     schema: {
         
@@ -14,12 +26,12 @@ AFRAME.registerComponent('movable', {
 
     init: function () {
       // Do something when component first attached.
-      obj = document.getElementById(incr2());
+      var _objID = incr2();
+      obj = document.getElementById(_objID);
       objtab.push(obj);
       console.log("Pojawil sie obiekt", obj  );
       console.log(objtab);
-
-      
+      obj.setAttribute('cursor-listener','');
       /*
       dodajac tutaj event listenery, działaja tylko do nowo dodanego obiektu,
       do optymalizacji można dodawać wszystkim z objtab
@@ -42,7 +54,6 @@ AFRAME.registerComponent('movable', {
         
         kolizja();
         move();
-        
     },
     tock: function(time,timeDelta)
     {
@@ -68,10 +79,7 @@ function AddObject()
   newObj.setAttribute('position',{x:5, y:4, z:-1});
   newObj.setAttribute('movable','');
   newObj.setAttribute('id',incr());
-
   newObj.setAttribute('collider','');
-  //newObj.setAttribute('event-set__enter','_event: mouseenter; material.color: #8FF7FF');
-  //newObj.setAttribute('event-set__leave','_event: mouseleave; material.color: #EF2D5E');
 
   //dodanie do sceny
   scene.appendChild(newObj);
