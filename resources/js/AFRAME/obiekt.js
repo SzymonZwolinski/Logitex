@@ -3,18 +3,15 @@
 var obj;
 var objtab =new Array();
 
-var szerokosc = 1;
-var wysokosc = 1;
-var glebokosc = 1;
-
-
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
-      var lastIndex = -1;
-      this.el.addEventListener('click', function (evt) {
-
+        /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
+        umożliwająca usunięcie obiektu */
+      this.el.addEventListener('mouseenter', function (evt) {
+          console.log(document.getElementById('nr'));
        document.getElementById('nr').value = evt.target.id;
       });
+   
     }
   });
 
@@ -63,14 +60,28 @@ AFRAME.registerComponent('movable', {
 });
 
 
-function AddObject()
+function AddObject(wysokosc,szerokosc,glebokosc)
 {
+  
+   console.log(isNaN(wysokosc));
+   if(isNaN(wysokosc) == true || wysokosc=="")
+   {
+       wysokosc=0.7;
+   }
+   if(isNaN(szerokosc) == true || szerokosc=="")
+   {
+        szerokosc=0.7;
+   }
+   if(isNaN(glebokosc) == true || glebokosc=="")
+   {
+       glebokosc = 0.7;
+   }
   //wybór obiektow
   var scene = document.querySelector('a-scene');
   var newObj = document.createElement('a-entity');
 
   //kwadrat i rozmiar
-  newObj.setAttribute('geometry',{primitive: "box", height: wysokosc, width: szerokosc, depth:glebokosc});
+  newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc, 'depth':glebokosc});
 
   //parametry
   newObj.setAttribute('click-drag','');
@@ -99,10 +110,9 @@ function DelObject(objID)
     }
     else
     {
-        alert("Obiekt nie istnieje!");
+        alert("Brak obiektu!");
     }
-   // scene.removeChild(Obj);
-    //Obj.removeChild(scene);
+
 }
 
 function move()
@@ -124,12 +134,13 @@ function move()
             var position = clickdrag.getAttribute('position');
             //blokada przed wywaleniem pod mape
             //Nie działa dobrze
-            /*
+            
             if(position.y <0)
             {
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
+            /*
             if(position.x <-10)
             {
                 var size = clickdrag.getAttribute('width');
