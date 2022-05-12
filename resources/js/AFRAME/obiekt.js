@@ -3,9 +3,18 @@
 var obj;
 var objtab =new Array();
 
-var szerokosc = 1;
-var wysokosc = 1;
-var glebokosc = 1;
+AFRAME.registerComponent('cursor-listener', {
+    init: function () {
+        /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
+        umożliwająca usunięcie obiektu */
+      this.el.addEventListener('mouseenter', function (evt) {
+          console.log(document.getElementById('nr'));
+       document.getElementById('nr').value = evt.target.id;
+      });
+   
+    }
+  });
+
 
 AFRAME.registerComponent('movable', {
     schema: {
@@ -14,12 +23,12 @@ AFRAME.registerComponent('movable', {
 
     init: function () {
       // Do something when component first attached.
-      obj = document.getElementById(incr2());
+      var _objID = incr2();
+      obj = document.getElementById(_objID);
       objtab.push(obj);
       console.log("Pojawil sie obiekt", obj  );
       console.log(objtab);
-
-      
+      obj.setAttribute('cursor-listener','');
       /*
       dodajac tutaj event listenery, działaja tylko do nowo dodanego obiektu,
       do optymalizacji można dodawać wszystkim z objtab
@@ -42,7 +51,6 @@ AFRAME.registerComponent('movable', {
         
         kolizja();
         move();
-        
     },
     tock: function(time,timeDelta)
     {
@@ -52,14 +60,28 @@ AFRAME.registerComponent('movable', {
 });
 
 
-function AddObject()
+function AddObject(wysokosc,szerokosc,glebokosc)
 {
+  
+   console.log(isNaN(wysokosc));
+   if(isNaN(wysokosc) == true || wysokosc=="")
+   {
+       wysokosc=0.7;
+   }
+   if(isNaN(szerokosc) == true || szerokosc=="")
+   {
+        szerokosc=0.7;
+   }
+   if(isNaN(glebokosc) == true || glebokosc=="")
+   {
+       glebokosc = 0.7;
+   }
   //wybór obiektow
   var scene = document.querySelector('a-scene');
   var newObj = document.createElement('a-entity');
 
   //kwadrat i rozmiar
-  newObj.setAttribute('geometry',{primitive: "box", height: wysokosc, width: szerokosc, depth:glebokosc});
+  newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc, 'depth':glebokosc});
 
   //parametry
   newObj.setAttribute('click-drag','');
@@ -68,15 +90,29 @@ function AddObject()
   newObj.setAttribute('position',{x:5, y:4, z:-1});
   newObj.setAttribute('movable','');
   newObj.setAttribute('id',incr());
-
   newObj.setAttribute('collider','');
-  //newObj.setAttribute('event-set__enter','_event: mouseenter; material.color: #8FF7FF');
-  //newObj.setAttribute('event-set__leave','_event: mouseleave; material.color: #EF2D5E');
 
   //dodanie do sceny
   scene.appendChild(newObj);
 
   
+}
+
+function DelObject(objID)
+{
+    console.log(objID);
+    var scene = document.querySelector('a-scene');
+    var rmObj = document.getElementById(objID);
+    if(rmObj!=null)
+    {
+        console.log(rmObj);
+        scene.removeChild(rmObj);
+    }
+    else
+    {
+        alert("Brak obiektu!");
+    }
+
 }
 
 function move()
@@ -98,12 +134,13 @@ function move()
             var position = clickdrag.getAttribute('position');
             //blokada przed wywaleniem pod mape
             //Nie działa dobrze
-            /*
+            
             if(position.y <0)
             {
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
+            /*
             if(position.x <-10)
             {
                 var size = clickdrag.getAttribute('width');
