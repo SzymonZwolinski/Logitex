@@ -1,7 +1,11 @@
-//import "./Collider.js"
+/* obsługa obiektów */
 
 var obj;
 var objtab =new Array();
+
+var szerokosc = 1;
+var wysokosc = 1;
+var glebokosc = 1;
 
 AFRAME.registerComponent('movable', {
     schema: {
@@ -14,6 +18,12 @@ AFRAME.registerComponent('movable', {
       objtab.push(obj);
       console.log("Pojawil sie obiekt", obj  );
       console.log(objtab);
+
+      
+      /*
+      dodajac tutaj event listenery, działaja tylko do nowo dodanego obiektu,
+      do optymalizacji można dodawać wszystkim z objtab
+      */
     },
 
     update: function () {
@@ -49,10 +59,7 @@ function AddObject()
   var newObj = document.createElement('a-entity');
 
   //kwadrat i rozmiar
-  newObj.setAttribute('geometry','primitive:box');
-  newObj.setAttribute('width','0.5');
-  newObj.setAttribute('heigh','0.5');
-  newObj.setAttribute('depth','0.5');
+  newObj.setAttribute('geometry',{primitive: "box", height: wysokosc, width: szerokosc, depth:glebokosc});
 
   //parametry
   newObj.setAttribute('click-drag','');
@@ -90,15 +97,17 @@ function move()
 
             var position = clickdrag.getAttribute('position');
             //blokada przed wywaleniem pod mape
+            //Nie działa dobrze
+            /*
             if(position.y <0)
             {
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
-            if(position.x >-10)
+            if(position.x <-10)
             {
                 var size = clickdrag.getAttribute('width');
-                clickdrag.setAttribute('position',{x: 0, y: position.y, z: position.z});
+                clickdrag.setAttribute('position',{x: -9+(size+0.01), y: position.y, z: position.z});
             }
             if(position.x >10)
             {
@@ -114,15 +123,17 @@ function move()
             {
                 console.log(position.z);
                 var size = clickdrag.getAttribute('depth');
-                clickdrag.setAttribute('position',{x: position.x, y: position.y, z:0});
+                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: -9+(size+0.01)});
             }
-            
-            clickdrag.components['dynamic-body'].play();
-            //zerowanie prędkosci rzucenia
+            */
+            clickdrag.setAttribute('rotation','0');  
             clickdrag.body.velocity.set(0,0,0);
             clickdrag.body.angularVelocity.set(0,0,0);
             clickdrag.body.vlambda.set(0,0,0);
             clickdrag.body.wlambda.set(0,0,0);
+            clickdrag.components['dynamic-body'].play();
+            //zerowanie prędkosci rzucenia
+          
  
         });
     });
