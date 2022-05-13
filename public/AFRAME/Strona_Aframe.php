@@ -1,21 +1,39 @@
 <!DOCTYPE HTML>
+ <head>
     <script src="https://jesstelford.github.io/aframe-click-drag-component/build.js"></script>
     <!--Aframe event--->
     <script src="https://unpkg.com/aframe-event-set-component@3.0.3/dist/aframe-event-set-component.min.js"></script>
-
-    <script src="../../resources/js/AFRAME/obiekt.js"></script>
-    <script src="../../resources/js/AFRAME/kamer.js">
+    <script>
+        function drpdedt() {
+          document.getElementById("myDropdown").classList.toggle("show");
+        }
     </script>
+    <script src="../../resources/js/AFRAME/obiekt.js" async></script>
+    <script src="../../resources/js/AFRAME/kamer.js" async>
+    </script>
+   
+    <link rel="stylesheet" href="../css/Aframe_buttons.css">
+  </head>
   <body>
     <div id ="ui">
-    <input type="number" name="height" id="height" placeholder="wysokosc...">
-    <input type="number" name="witdth" id="width" placeholder="szerokosc...">
-    <input type="number" name="depth" id="depth" placeholder="glebokosc...">
-    <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value)">
+      <input type="number" name="height" id="height" placeholder="wysokosc...">
+      <input type="number" name="witdth" id="width" placeholder="szerokosc...">
+      <input type="number" name="depth" id="depth" placeholder="glebokosc...">
+      <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value)">
 
-      <input type="number" name="nr" id="nr" hidden>
-      <input type="submit" name="del" value="Skasuj obiekt" onclick="DelObject(document.getElementById('nr').value)" >
+        <input type="number" name="nr" id="nr" hidden>
+        <input type="submit" name="del" value="Skasuj obiekt" onclick="DelObject(document.getElementById('nr').value)" >
 
+        <div class="dropdown">
+            <button onclick="drpdedt()" class="dropbtn">Edytuj Obiekt</button>
+              <div id="myDropdown" class="dropdown-content">
+                  <input type="number" name="edit_height" id="edit_height" placeholder="wysokosc...">
+                  <input type="number" name="edit_witdth" id="edit_width" placeholder="szerokosc...">
+                  <input type="number" name="edit_depth"  id="edit_depth" placeholder="glebokosc...">
+                  <input type="button" name="edobiekt" value="Potwierdź" onclick="EditObject(document.getElementById('nr').value, document.getElementById('edit_height').value, document.getElementById('edit_width').value, document.getElementById('edit_depth').value)">
+              </div>
+        </div>
+      
     <input type="button" name="kamera2" value="Zamien Kamere" onclick="ChCam()">  
   </div>
     <a-scene fog  renderer="precision: low; antialias:false;" >

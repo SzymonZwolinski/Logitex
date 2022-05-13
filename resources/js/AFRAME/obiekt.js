@@ -62,8 +62,6 @@ AFRAME.registerComponent('movable', {
 
 function AddObject(wysokosc,szerokosc,glebokosc)
 {
-  
-   console.log(isNaN(wysokosc));
    if(isNaN(wysokosc) == true || wysokosc=="")
    {
        wysokosc=0.7;
@@ -110,9 +108,44 @@ function DelObject(objID)
     }
     else
     {
-        alert("Brak obiektu!");
+        alert("Brak obiektu do usunięcia!");
     }
 
+}
+
+function EditObject(objID,wysokosc,szerokosc,glebokosc)
+{
+    console.log(objID);
+    var editObj = document.getElementById(objID);
+   
+    if(editObj!= null)
+    { 
+        var chck = true;
+        if(isNaN(wysokosc) == true || wysokosc=="")
+        {
+            chck = false;
+            alert("Brak podanej wysokości do edycji!");
+        }
+        if(isNaN(szerokosc) == true || szerokosc=="")
+        {
+            chck = false;
+            alert("Brak podanej szerokości do edycji!");
+        }
+        if(isNaN(glebokosc) == true || glebokosc=="")
+        {
+            chck = false;
+            alert("Brak podanej głębokości do edycji!");
+        }
+
+        if(chck == true)
+        {
+            editObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc, 'depth':glebokosc});
+        }
+    }
+    else
+    {
+        alert("Brak obiektu do edycji!");
+    }
 }
 
 function move()
