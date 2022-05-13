@@ -244,7 +244,3 @@ var incr2 = (function () {
         return i++;
     }
 })();
-
-function drpdedt() {
-    document.getElementById("myDropdown").classList.toggle("show");
-  }

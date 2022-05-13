@@ -30,7 +30,7 @@
                   <input type="number" name="edit_height" id="edit_height" placeholder="wysokosc...">
                   <input type="number" name="edit_witdth" id="edit_width" placeholder="szerokosc...">
                   <input type="number" name="edit_depth"  id="edit_depth" placeholder="glebokosc...">
-                  <input type="button" name="edobiekt" value="Potwierdź" onclick="EditObject(document.getElementById('nr').value,document.getElementById('edit_height').value,document.getElementById('edit_width').value,document.getElementById('edit_depth').value)">
+                  <input type="button" name="edobiekt" value="Potwierdź" onclick="EditObject(document.getElementById('nr').value, document.getElementById('edit_height').value, document.getElementById('edit_width').value, document.getElementById('edit_depth').value)">
               </div>
         </div>
       
