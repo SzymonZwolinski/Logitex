@@ -54,6 +54,8 @@
           </div>
           <!-- /.col -->
         </div>
+        <div class="mb-1">
+          <button onlick="alercik()">Zapomnialem hasla</button>
       </form>
 
 
@@ -63,6 +65,7 @@
         <a href="{{ route('password.request') }}">Zapomnialem hasla</a>
       </p>
       <p class="mb-0">
+        
         <!--<a href="register.html" class="text-center">Register a new membership</a> -->
       </p>
     </div>
@@ -73,6 +76,7 @@
 <!-- /.login-box -->
 
 <!-- jQuery -->
+<script src="{{asset('backend/plugins/jquery/alercik.js')}}"></script>
 <script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
