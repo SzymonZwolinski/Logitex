@@ -7,6 +7,11 @@ use Illuminate\Http\Request;
 
 class VehicleController extends Controller
 {
+    public function authorize()
+{
+    return true; // this is false by default which means unauthorized 403
+}
+
     /**
      * Display a listing of the resource.
      *

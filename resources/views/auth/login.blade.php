@@ -13,6 +13,13 @@
   <link rel="stylesheet" href="{{asset('backend/plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{asset('backend/dist/css/adminlte.min.css')}}">
+  <!-- jQuery -->
+<script src="{{asset('backend/plugins/jquery/alercik.js')}}"></script>
+<script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
+<!-- Bootstrap 4 -->
+<script src="{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<!-- AdminLTE App -->
+<script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -55,7 +62,7 @@
           <!-- /.col -->
         </div>
         <div class="mb-1">
-          <button onlick="alercik()">Zapomnialem hasla</button>
+          <input type="button" onclick="alercik()">Zapomnialem hasla</button>
       </form>
 
 
@@ -75,12 +82,6 @@
 </div>
 <!-- /.login-box -->
 
-<!-- jQuery -->
-<script src="{{asset('backend/plugins/jquery/alercik.js')}}"></script>
-<script src="{{asset('backend/plugins/jquery/jquery.min.js')}}"></script>
-<!-- Bootstrap 4 -->
-<script src="{{asset('backend/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<!-- AdminLTE App -->
-<script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
+
 </body>
 </html>

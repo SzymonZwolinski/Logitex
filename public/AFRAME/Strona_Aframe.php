@@ -10,9 +10,11 @@
     </script>
     <script src="../js/obiekt.js" ></script>
     <script src="../js/kamer.js"></script>
+    <script src="../js/AF_load.js"></script>
+
     <link rel="stylesheet" href="../css/Aframe_buttons.css">
   </head>
-  <body>
+  <body onload="load()">
     <div id ="ui">
       <input type="number" name="height" id="height" placeholder="wysokosc...">
       <input type="number" name="witdth" id="width" placeholder="szerokosc...">
