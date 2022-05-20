@@ -21,13 +21,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
     //kwadrat i rozmiar 1
     //Podloga
     //newObj.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc/10, 'width': szerokosc/10, 'depth':dlugosc/10});
-    newObj.setAttribute('height',wysokosc/10);
-    newObj.setAttribute('width',szerokosc/10);
-    newObj.setAttribute('static-body','');
-    newObj.setAttribute('material','color','grey');
-    newObj.setAttribute('position',{x:0, y:0.01, z:0});
-    newObj.setAttribute('rotation','-90 0 0');
-    newObj.setAttribute('id','-1');
+ 
     //newObj.removeAttribute('collide','');
     //kwadrat i rozmiar 2
     //Sciana z+
@@ -68,7 +62,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
     
   
     //dodanie do sceny
-    scene.appendChild(newObj);
+    
     scene.appendChild(newObj1);
     scene.appendChild(newObj2);
     scene.appendChild(newObj3);

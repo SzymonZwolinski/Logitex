@@ -49,7 +49,6 @@ AFRAME.registerComponent('movable', {
     },
 
     tick: function (t, dt) {
-        
         kolizja();
         move();
     },
@@ -212,6 +211,7 @@ function move()
 
 function kolizja()
 {
+    console.log("ASD");
     var colliders =document.querySelectorAll('[collider]');
     colliders.forEach(function(collider)
     {
