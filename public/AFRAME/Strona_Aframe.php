@@ -35,6 +35,7 @@
         </div>
       
     <input type="button" name="kamera2" value="Zamien Kamere" onclick="ChCam()">  
+    <input type="button" name="zapis" value="Zapisz" onclick="save()">
   </div>
     <a-scene fog  renderer="precision: low; antialias:false;" >
 
