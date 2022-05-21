@@ -12,16 +12,12 @@ function load()
 function addTrailer(szerokosc,wysokosc,dlugosc)
 {
     var scene = document.querySelector('a-scene');
-    var newObj = document.createElement('a-plane');
     var newObj1 = document.createElement('a-entity');
     var newObj2 = document.createElement('a-entity');
     var newObj3 = document.createElement('a-entity');
     var newObj4 = document.createElement('a-entity');
     var newObj5 = document.createElement('a-entity');
-    //kwadrat i rozmiar 1
-    //Podloga
-    //newObj.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc/10, 'width': szerokosc/10, 'depth':dlugosc/10});
- 
+
     //newObj.removeAttribute('collide','');
     //kwadrat i rozmiar 2
     //Sciana z+
