@@ -24,3 +24,7 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/trailers', App\Http\Controllers\TrailerController::class);
 
 Route::resource('/cars', App\Http\Controllers\CarController::class);
+
+Route::resource('/orders', App\Http\Controllers\OrderController::class);
+
+//Route::post('/orders',App\Http\Controllers\SaveOrderController::class@);

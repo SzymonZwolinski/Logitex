@@ -64,22 +64,22 @@ function AddObject(wysokosc,szerokosc,glebokosc)
 {
    if(isNaN(wysokosc) == true || wysokosc=="")
    {
-       wysokosc=0.7;
+       wysokosc=1.2;
    }
    if(isNaN(szerokosc) == true || szerokosc=="")
    {
-        szerokosc=0.7;
+        szerokosc=1;
    }
    if(isNaN(glebokosc) == true || glebokosc=="")
    {
-       glebokosc = 0.7;
+       glebokosc = 1.2;
    }
   //wybór obiektow
   var scene = document.querySelector('a-scene');
   var newObj = document.createElement('a-entity');
 
   //kwadrat i rozmiar
-  newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc, 'depth':glebokosc});
+  newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc*(0.58333333), 'depth':glebokosc*(0.58333333)});
 
   //parametry
   newObj.setAttribute('click-drag','');
@@ -238,21 +238,37 @@ function save()
     let geometria;
     let identyfikator;
     let doZapisu;
-    let fromJSON;
+    let params = new URLSearchParams(document.location.search);
+    let id = params.get('tr');
     objtab.forEach (function(fun)
     {
         pozycja = JSON.stringify(fun.getAttribute('position'));
         geometria = JSON.stringify(fun.getAttribute('geometry'));
         identyfikator = fun.getAttribute('id');
-        doZapisu = identyfikator.concat(geometria,pozycja);
+        doZapisu = identyfikator.concat("G:",geometria,"P:",pozycja);
         saveArr.push(doZapisu);
-        console.log("save: ",save);
     });
     let toJSON = JSON.stringify(saveArr);
-    console.log("save jako json: ",toJSON);
-    fromJSON = JSON.parse(toJSON);
-    console.log("Odzyskane dane: ", fromJSON);
+    //console.log("save jako json: ",toJSON);
+    toJSON = toJSON.concat(id);
+    var xhr = new XMLHttpRequest();    
+    xhr.open("POST","./orderSave/saveOrder.php",true);
+    xhr.setRequestHeader("Content-Type","application/json");
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4) {
+            if (xhr.status === 200) {
+               console.log('successful');
+            } else {
+               console.log('failed');
+            }
+        }
+      }
+  
 
+    xhr.send(toJSON);
+    
+    
+    
 }
 
 var incr = (function () {
