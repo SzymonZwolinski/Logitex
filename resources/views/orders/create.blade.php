@@ -1,12 +1,11 @@
-
-<?php $__env->startSection('content'); ?>
+@extends('orders.layout')
+@section('content')
 <div class="card">
-  <div class="card-header">Trailers Page</div>
+  <div class="card-header">orders Page</div>
   <div class="card-body">
       
-      <form action="<?php echo e(url('trailers/')); ?>" method="post">
-        <?php echo csrf_field(); ?>
-
+      <form action="{{ url('orders/') }}" method="post">
+        {!! csrf_field() !!}
         <label>kubatura</label></br>
         <input type="number" name="kubatura" id="kubatura" class="form-control"></br>
         <label>waga</label></br>
@@ -26,5 +25,4 @@
   
   </div>
 </div>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('trailers.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\xamp\htdocs\Logitex\resources\views/trailers/create.blade.php ENDPATH**/ ?>
+@stop

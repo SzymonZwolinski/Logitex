@@ -1,8 +1,8 @@
-@extends('trailers.layout')
+@extends('orders.layout')
 @section('content')
 <head>
     <!-- Head Contents -->
-    <script src="../../js/aframeload.js"></script>
+    <script src="../../js/loadorder.js"></script>
 </head>
 <body>
     <div class="container">
@@ -13,7 +13,7 @@
                         <h2>Laravel 9 Crud</h2>
                     </div>
                     <div class="card-body">
-                        <a href="{{ url('/trailers/create') }}" class="btn btn-success btn-sm" title="Add New Trailer">
+                        <a href="{{ url('/orders/create') }}" class="btn btn-success btn-sm" title="Add New order">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
                         <br/>
@@ -23,39 +23,42 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>kubatura</th>
                                         <th>waga</th>
-                                        <th>liczba_osi</th>
+                                        <th>naczepa</th>
                                         <th>szerokosc</th>
                                         <th>dlugosc</th>
                                         <th>wysokosc</th>
-                                        <th>dostepnosc</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($trailers as $item)
-                                    <tr>
+                               
+                                    <tr> 
+                                        {{$data = DB::table('orders as o')
+                                ->select('o.id','o.trailer','o.waga','t.szerokosc', 't.dlugosc', 't.wysokosc','o.ladunek')
+                                ->join('trailers as t', 'o.trailer', '=', 't.id')
+                                ->get();}}
+                                @foreach($data as $item)
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $item->kubatura }}</td>
                                         <td>{{ $item->waga }}</td>
-                                        <td>{{ $item->liczba_osi }}</td>
+                                        <td>{{ $item->trailer }}</td>
                                         <td>{{ $item->szerokosc }}</td>
                                         <td>{{ $item->dlugosc }}</td>
                                         <td>{{ $item->wysokosc }}</td>
-                                        <td>{{ $item->dostepnosc }}</td>
-                                            {{$item->ladunek}}
+                                            {{$item ->ladunek}}
                                         <td>
-                                            <input type="button" value="Wybierz" onclick=" loadtrailer({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }} )">
-                                            <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                                            <form method="POST" action="{{ url('/trailers' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
+                                        <input type="button" value="Wybierz" onclick=" loadOrder({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }},{{$item->waga}},{{$item->ladunek}})">
+
+                                            <a href="{{ url('/orders/' . $item->id) }}" title="View order"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
+                                            <a href="{{ url('/orders/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <form method="POST" action="{{ url('/orders' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete order" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
                                             </form>
                                         </td>
                                     </tr>
-                                @endforeach
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>

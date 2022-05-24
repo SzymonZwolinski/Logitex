@@ -35,7 +35,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
     newObj2.setAttribute('rotation','0 0 0');
     //kwadrat i rozmiar 4 
     //Sciana x+
-    newObj3.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc/10, 'width': szerokosc/10, 'depth':dlugosc/10});
+    newObj3.setAttribute('geometry',{'primitive': 'plane', 'height': (wysokosc/10)*(0.58333333), 'width': (szerokosc/10)*(0.58333333), 'depth':(dlugosc/10)*(0.58333333)});
     newObj3.setAttribute('static-body','');
     newObj3.setAttribute('material','color','magenta');
     newObj3.setAttribute('position',{x:(szerokosc/2)/10, y:(wysokosc/2)/10, z:0});
