@@ -34,6 +34,12 @@ Route::resource('/trailers', App\Http\Controllers\TrailerController::class);
 
 Route::resource('/cars', App\Http\Controllers\CarController::class);
 
+<<<<<<< HEAD
 
 
 require __DIR__.'/auth.php';
+=======
+Route::resource('/orders', App\Http\Controllers\OrderController::class);
+
+//Route::post('/orders',App\Http\Controllers\SaveOrderController::class@);
+>>>>>>> 818466394d44556b22c872cc3b5b31dd801ad350

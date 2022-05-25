@@ -44,7 +44,7 @@
                                         <td><?php echo e($item->wysokosc); ?></td>
                                         <td><?php echo e($item->dostepnosc); ?></td>
                                         <td>
-                                            <input type="button" value="Wybierz" onclick=" loadtrailer(<?php echo e($item->szerokosc); ?>,<?php echo e($item->dlugosc); ?>,<?php echo e($item->wysokosc); ?> )">
+                                            <input type="button" value="Wybierz" onclick=" loadtrailer(<?php echo e($item->id); ?>,<?php echo e($item->szerokosc); ?>,<?php echo e($item->dlugosc); ?>,<?php echo e($item->wysokosc); ?> )">
                                             <a href="<?php echo e(url('/trailers/' . $item->id)); ?>" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="<?php echo e(url('/trailers/' . $item->id . '/edit')); ?>" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="<?php echo e(url('/trailers' . '/' . $item->id)); ?>" accept-charset="UTF-8" style="display:inline">
