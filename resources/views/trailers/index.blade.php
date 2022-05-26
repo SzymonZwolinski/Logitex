@@ -33,7 +33,13 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($trailers as $item)
+                                    <div style="display: none">
+                                {{$data = DB::table('trailers')
+                                ->select('*')
+                                ->where('dostepnosc','=','1')
+                                ->get();}}
+                                </div>
+                                @foreach($data as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->kubatura }}</td>
@@ -43,9 +49,9 @@
                                         <td>{{ $item->dlugosc }}</td>
                                         <td>{{ $item->wysokosc }}</td>
                                         <td>{{ $item->dostepnosc }}</td>
-                                            {{$item->ladunek}}
+                        
                                         <td>
-                                            <input type="button" value="Wybierz" onclick=" loadtrailer({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }} )">
+                                            <input type="button" value="Wybierz" onclick=" loadtrailer({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }},{{$item->dostepnosc}} )">
                                             <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="{{ url('/trailers' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
