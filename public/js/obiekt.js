@@ -9,7 +9,7 @@ AFRAME.registerComponent('cursor-listener', {
         /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
         umożliwająca usunięcie obiektu */
       this.el.addEventListener('mouseenter', function (evt) {
-          console.log(document.getElementById('nr'));
+          //console.log(document.getElementById('nr'));
        document.getElementById('nr').value = evt.target.id;
       });
    
@@ -49,7 +49,6 @@ AFRAME.registerComponent('movable', {
     },
 
     tick: function (t, dt) {
-        
         kolizja();
         move();
     },
@@ -86,7 +85,7 @@ function AddObject(wysokosc,szerokosc,glebokosc)
   newObj.setAttribute('click-drag','');
   newObj.setAttribute('dynamic-body','mass:90000');
   newObj.setAttribute('material','color','blue');
-  newObj.setAttribute('position',{x:5, y:4, z:-1});
+  newObj.setAttribute('position',{x:0, y:0.4, z:0});
   newObj.setAttribute('movable','');
   newObj.setAttribute('id',incr());
   newObj.setAttribute('collider','');
@@ -212,7 +211,6 @@ function move()
 
 function kolizja()
 {
-
     var colliders =document.querySelectorAll('[collider]');
     colliders.forEach(function(collider)
     {
@@ -230,6 +228,30 @@ function kolizja()
            }
         });
     });
+
+}
+
+function save()
+{
+    let saveArr = new Array();
+    let pozycja;
+    let geometria;
+    let identyfikator;
+    let doZapisu;
+    let fromJSON;
+    objtab.forEach (function(fun)
+    {
+        pozycja = JSON.stringify(fun.getAttribute('position'));
+        geometria = JSON.stringify(fun.getAttribute('geometry'));
+        identyfikator = fun.getAttribute('id');
+        doZapisu = identyfikator.concat(geometria,pozycja);
+        saveArr.push(doZapisu);
+        console.log("save: ",save);
+    });
+    let toJSON = JSON.stringify(saveArr);
+    console.log("save jako json: ",toJSON);
+    fromJSON = JSON.parse(toJSON);
+    console.log("Odzyskane dane: ", fromJSON);
 
 }
 

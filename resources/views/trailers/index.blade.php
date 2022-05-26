@@ -1,15 +1,20 @@
 @extends('trailers.layout')
 @section('content')
+<head>
+    <!-- Head Contents -->
+    <script src="../../js/aframeload.js"></script>
+</head>
+<body>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Laravel 9 Crud</h2>
+                        <h2>Lista naczep w firmie</h2>
                     </div>
                     <div class="card-body">
                         <a href="{{ url('/trailers/create') }}" class="btn btn-success btn-sm" title="Add New Trailer">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            <i class="fa fa-plus" aria-hidden="true"></i> Dodaj naczepe
                         </a>
                         <br/>
                         <br/>
@@ -39,12 +44,13 @@
                                         <td>{{ $item->wysokosc }}</td>
                                         <td>{{ $item->dostepnosc }}</td>
                                         <td>
-                                            <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
+                                            <input type="button" value="Kreuj zamówienie" onclick=" loadtrailer({{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }} )">
+                                            <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Podgląd</button></a>
+                                            <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button></a>
                                             <form method="POST" action="{{ url('/trailers' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -57,4 +63,5 @@
             </div>
         </div>
     </div>
+</body>
 @endsection
