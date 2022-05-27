@@ -8935,3 +8935,31 @@ avigation.blade.php","data":{"errors":"<pre class=sf-dump id=sf-dump-990236840 d
 #26 F:\\xamp\\htdocs\\Logitex\\public\\index.php(52): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))
 #27 {main}
 "} 
+[2022-05-27 16:05:37] local.ERROR: include(F:\xamp\htdocs\Logitex\vendor\composer/../laravel/breeze/src/BreezeServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(F:\\xamp\\htdocs\\Logitex\\vendor\\composer/../laravel/breeze/src/BreezeServiceProvider.php): Failed to open stream: No such file or directory at F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php:571)
+[stacktrace]
+#0 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(255): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(F:\\\\xamp...', 'F:\\\\xamp\\\\htdocs\\\\...', 571)
+#1 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(571): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(F:\\\\xamp...', 'F:\\\\xamp\\\\htdocs\\\\...', 571)
+#2 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(571): include('F:\\\\xamp\\\\htdocs\\\\...')
+#3 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('F:\\\\xamp\\\\htdocs\\\\...')
+#4 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(820): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Breeze\\\\...')
+#5 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(800): Illuminate\\Foundation\\Application->registerDeferredProvider('Laravel\\\\Breeze\\\\...', 'Laravel\\\\Breeze\\\\...')
+#6 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(776): Illuminate\\Foundation\\Application->loadDeferredProvider('Laravel\\\\Breeze\\\\...')
+#7 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(313): Illuminate\\Foundation\\Application->loadDeferredProviders()
+#8 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 F:\\xamp\\htdocs\\Logitex\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 {main}
+"} 
+[2022-05-27 16:05:52] local.ERROR: include(F:\xamp\htdocs\Logitex\vendor\composer/../laravel/breeze/src/BreezeServiceProvider.php): Failed to open stream: No such file or directory {"exception":"[object] (ErrorException(code: 0): include(F:\\xamp\\htdocs\\Logitex\\vendor\\composer/../laravel/breeze/src/BreezeServiceProvider.php): Failed to open stream: No such file or directory at F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php:571)
+[stacktrace]
+#0 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Bootstrap\\HandleExceptions.php(255): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->handleError(2, 'include(F:\\\\xamp...', 'F:\\\\xamp\\\\htdocs\\\\...', 571)
+#1 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(571): Illuminate\\Foundation\\Bootstrap\\HandleExceptions->Illuminate\\Foundation\\Bootstrap\\{closure}(2, 'include(F:\\\\xamp...', 'F:\\\\xamp\\\\htdocs\\\\...', 571)
+#2 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(571): include('F:\\\\xamp\\\\htdocs\\\\...')
+#3 F:\\xamp\\htdocs\\Logitex\\vendor\\composer\\ClassLoader.php(428): Composer\\Autoload\\includeFile('F:\\\\xamp\\\\htdocs\\\\...')
+#4 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(820): Composer\\Autoload\\ClassLoader->loadClass('Laravel\\\\Breeze\\\\...')
+#5 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(800): Illuminate\\Foundation\\Application->registerDeferredProvider('Laravel\\\\Breeze\\\\...', 'Laravel\\\\Breeze\\\\...')
+#6 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Application.php(776): Illuminate\\Foundation\\Application->loadDeferredProvider('Laravel\\\\Breeze\\\\...')
+#7 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(313): Illuminate\\Foundation\\Application->loadDeferredProviders()
+#8 F:\\xamp\\htdocs\\Logitex\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(127): Illuminate\\Foundation\\Console\\Kernel->bootstrap()
+#9 F:\\xamp\\htdocs\\Logitex\\artisan(37): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 {main}
+"} 

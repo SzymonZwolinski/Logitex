@@ -39,11 +39,8 @@
   </div>
     <a-scene fog  renderer="precision: low; antialias:false;" >
 
-      <a-plane static-body rotation="-90 0 0" width="20" height="20" color="#7BC8A4"></a-plane>
-      <a-entity  geometry="primitive:plane; width:20; height:10" rotation="0 -180 0" position="0 5 10" color="#7BC8A4"></a-entity>
-      <a-entity  geometry="primitive:plane; width:20; height:10" rotation="0 0 0" position="0 5 -10" color="#7BC8A4"></a-entity>
-      <a-entity geometry="primitive:plane; width:20; height:10" rotation="0 -90 0" position="10 5 0" color="#7BC8A4"></a-entity>
-      <a-entity  geometry="primitive:plane; width:20; height:10" rotation="0 90 0" position="-10 5 0" color="#7BC8A4"></a-entity>
+      <a-plane static-body rotation="-90 0 0" width="8" height="2.52" color="#7BC8A4"></a-plane>
+      
       <a-sky color="#ECECEC"></a-sky>
 
       <a-entity position="0 1 3.8">
