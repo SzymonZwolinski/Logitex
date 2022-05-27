@@ -33,11 +33,16 @@
                                 </thead>
                                 <tbody>
                                
-                                    <tr> 
+                                    
+                                        <div style="display: none">
+                                 
                                         {{$data = DB::table('orders as o')
                                 ->select('o.id','o.trailer','o.waga','t.szerokosc', 't.dlugosc', 't.wysokosc','o.ladunek')
                                 ->join('trailers as t', 'o.trailer', '=', 't.id')
                                 ->get();}}
+                               
+                                        </div>
+                                    <tr>     
                                 @foreach($data as $item)
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->waga }}</td>
@@ -45,10 +50,9 @@
                                         <td>{{ $item->szerokosc }}</td>
                                         <td>{{ $item->dlugosc }}</td>
                                         <td>{{ $item->wysokosc }}</td>
-                                            {{$item ->ladunek}}
+                                        <div style="display: none">< {{$item ->ladunek}}</div>
                                         <td>
-                                        <input type="button" value="Wybierz" onclick=" loadOrder({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }},{{$item->waga}},{{$item->ladunek}})">
-
+                                        <input type="button" value="Wybierz" onclick=" loadOrder({{$item->id}},{{$item->trailer}},{{ $item->szerokosc}},{{ $item->dlugosc}} ,{{ $item->wysokosc }},{{$item->waga}},{{json_encode($item->ladunek)}})">
                                             <a href="{{ url('/orders/' . $item->id) }}" title="View order"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/orders/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="{{ url('/orders' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">

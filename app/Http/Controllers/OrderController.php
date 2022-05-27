@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
+
 
 class OrderController extends Controller
 {
@@ -52,7 +54,9 @@ class OrderController extends Controller
   
     public function destroy($id)
     {
+
         Order::destroy($id);
         return redirect('orders')->with('flash_message', 'Order deleted!');  
     }
+
 }

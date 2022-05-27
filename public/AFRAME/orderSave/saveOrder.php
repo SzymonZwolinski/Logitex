@@ -11,12 +11,16 @@
         $conn = new mysqli("localhost","root","","logitex");
         
         $sql = "INSERT INTO orders  VALUES (default,'$ladunek', '1','$id')";
-        echo $ladunek;
+        $upd = "UPDATE trailers SET dostepnosc = 0 WHERE '$id' = id";
         if (mysqli_query($conn, $sql) == TRUE) {
             echo "New record created successfully";
           } else {
             echo "Error: " . $sql . "<br>" . $conn->error;
           }
-
+          if (mysqli_query($conn, $upd) == TRUE) {
+            echo "New record created successfully";
+          } else {
+            echo "Error: " . $sql . "<br>" . $conn->error;
+          }
         $conn->close();
 ?>

@@ -33,7 +33,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php $__currentLoopData = $trailers; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div style="display: none">
+                                <?php echo e($data = DB::table('trailers')
+                                ->select('*')
+                                ->where('dostepnosc','=','1')
+                                ->get()); ?>
+
+                                </div>
+                                <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <tr>
                                         <td><?php echo e($loop->iteration); ?></td>
                                         <td><?php echo e($item->kubatura); ?></td>
@@ -43,8 +50,9 @@
                                         <td><?php echo e($item->dlugosc); ?></td>
                                         <td><?php echo e($item->wysokosc); ?></td>
                                         <td><?php echo e($item->dostepnosc); ?></td>
+                        
                                         <td>
-                                            <input type="button" value="Wybierz" onclick=" loadtrailer(<?php echo e($item->id); ?>,<?php echo e($item->szerokosc); ?>,<?php echo e($item->dlugosc); ?>,<?php echo e($item->wysokosc); ?> )">
+                                            <input type="button" value="Wybierz" onclick=" loadtrailer(<?php echo e($item->id); ?>,<?php echo e($item->szerokosc); ?>,<?php echo e($item->dlugosc); ?>,<?php echo e($item->wysokosc); ?>,<?php echo e($item->dostepnosc); ?> )">
                                             <a href="<?php echo e(url('/trailers/' . $item->id)); ?>" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="<?php echo e(url('/trailers/' . $item->id . '/edit')); ?>" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="<?php echo e(url('/trailers' . '/' . $item->id)); ?>" accept-charset="UTF-8" style="display:inline">
