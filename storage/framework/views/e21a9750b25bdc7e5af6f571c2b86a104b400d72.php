@@ -10,11 +10,11 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Laravel 9 Crud</h2>
+                        <h2>Lista naczep w firmie</h2>
                     </div>
                     <div class="card-body">
                         <a href="<?php echo e(url('/trailers/create')); ?>" class="btn btn-success btn-sm" title="Add New Trailer">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                            <i class="fa fa-plus" aria-hidden="true"></i> Dodaj naczepe
                         </a>
                         <br/>
                         <br/>
@@ -52,7 +52,9 @@
                                         <td><?php echo e($item->dostepnosc); ?></td>
                         
                                         <td>
+
                                             <input type="button" value="Wybierz" onclick=" loadtrailer(<?php echo e($item->id); ?>,<?php echo e($item->szerokosc); ?>,<?php echo e($item->dlugosc); ?>,<?php echo e($item->wysokosc); ?>,<?php echo e($item->dostepnosc); ?> )">
+
                                             <a href="<?php echo e(url('/trailers/' . $item->id)); ?>" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="<?php echo e(url('/trailers/' . $item->id . '/edit')); ?>" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="<?php echo e(url('/trailers' . '/' . $item->id)); ?>" accept-charset="UTF-8" style="display:inline">
@@ -60,7 +62,7 @@
 
                                                 <?php echo e(csrf_field()); ?>
 
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
                                             </form>
                                         </td>
                                     </tr>
