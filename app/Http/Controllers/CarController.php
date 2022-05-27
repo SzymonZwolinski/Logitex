@@ -12,6 +12,12 @@ use App\Http\Controllers\CarController;
 class CarController extends Controller
 {
     
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
     public function index()
     {
         $cars = Car::all();
