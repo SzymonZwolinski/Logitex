@@ -100,7 +100,7 @@ function wait_toload()
 {
     var readyStateCheckInterval = setInterval(function()
      {
-        if (document.readyState === "complete") 
+        if (document.readyState == "complete") 
         {
             clearInterval(readyStateCheckInterval);
             zbierz();
@@ -139,9 +139,8 @@ function zbierz()
         pChar_end = text.indexOf("}");
         position = text.substr(pChar+2,pChar_end-1);
         text = text.substr(pChar_end+2);
-        console.log("geo= ",geometry);
-        console.log("pozyc= ", position.replaceAll('"',''));
-        obj_cr(geometry.replaceAll('"',"'"),position.replaceAll('"',''));
+
+        obj_cr(geometry.replaceAll(`"`,`'`),position.replaceAll('"',''));
     }
 
 
@@ -170,23 +169,40 @@ function getCookie(name)
 }
 function obj_cr(geo, pos)
 {
-//wczytanie zapisanych obiektow
-//wybór obiektow
-var scene = document.querySelector('a-scene');
-var newObj = document.createElement('a-entity');
+    let _x = pos.indexOf("x");
+    let _y = pos.indexOf("y");
+    let _z = pos.indexOf("z");
+    let charEnd = pos.indexOf("}");
+    let myX = pos.substr(_x+2,(_y-(_x)-3));
+    let myY = pos.substr(_y+2,(_z-(_y))-3);
+    let myZ = pos.substr(_z+2,(charEnd-(_z))-2);
 
-//kwadrat i rozmiar
-newObj.setAttribute('geometry',geo);
-newObj.setAttribute('position',pos+0.1);
 
-newObj.setAttribute('click-drag','');
-newObj.setAttribute('dynamic-body','mass:90000');
-newObj.setAttribute('material','color','blue');
-newObj.setAttribute('movable','');
-newObj.setAttribute('id',incr());
-newObj.setAttribute('collider','');
-//dodanie do sceny
-scene.appendChild(newObj);
+    let _height = geo.indexOf("height");
+    let _width = geo.indexOf("width");
+    let _depth = geo.indexOf("depth");
+    let goeEnd = geo.indexOf("}");
+    let myHeight = geo.substr(_height+8,(_width-(_height+10)));
+    let myWidth = geo.substr(_width+7,(_depth-(_width+9)));
+    let myDepth = geo.substr(_depth+7,(goeEnd-(_depth+7)));
+    //wczytanie zapisanych obiektow
+    //wybór obiektow
+    var scene = document.querySelector('a-scene');
+    var newObj = document.createElement('a-entity');
+
+    //kwadrat i rozmiar{'primitive':'box','height':1.2,'width':0.58333333,'depth':0.699999996}
+    newObj.setAttribute('geometry',{'primitive':'box','height':myHeight,'width':myWidth,'depth':myDepth});
+
+    newObj.setAttribute('click-drag','');
+    newObj.setAttribute('dynamic-body','mass:90000');
+    newObj.setAttribute('material','color','white');
+    newObj.setAttribute('position',{x:myX, y:myY, z:myZ});
+
+    newObj.setAttribute('movable','');
+    newObj.setAttribute('id',incr());
+    newObj.setAttribute('collider','');
+    //dodanie do sceny
+    scene.appendChild(newObj);
 }
 
 
@@ -344,7 +360,6 @@ function save()
     let identyfikator;
     let doZapisu;
 
-=======
     let params = new URLSearchParams(document.location.search);
     let id = params.get('tr');
 
