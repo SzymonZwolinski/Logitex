@@ -1,27 +1,7 @@
 function loadOrder(id,trailer,szerokosc, dlugosc, wysokosc,waga,ladunek)
 {
 
-    /*
-    var xhr = new XMLHttpRequest();    
-    xhr.open("POST","/AFRAME/load_Strona_Aframe.php",true);
-    xhr.setRequestHeader("Content-Type","application/json");
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4) {
-            if (xhr.status == 200) {
-               window.location.href = xhr.responseURL+'?sz='+szerokosc+'&wys='+wysokosc+'&dl='+dlugosc+'&wg='+waga+'&tr='+trailer+"&id="+id;
-               
-            } else {
-               console.log('failed');
-            }
-        }
-      }
-      
 
-    let toJSON = JSON.stringify(ladunek);
-    console.log(toJSON);
-    console.log("parse",JSON.parse(toJSON));
-    xhr.send(toJSON);
-    */
    setCookie(id,ladunek,1);
    window.location.href = '/AFRAME/load_Strona_Aframe.php?sz='+szerokosc+'&wys='+wysokosc+'&dl='+dlugosc+'&wg='+waga+'&tr='+trailer+"&id="+id;
 }

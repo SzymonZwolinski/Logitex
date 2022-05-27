@@ -96,6 +96,111 @@ function AddObject(wysokosc,szerokosc,glebokosc)
   
 }
 
+function wait_toload()
+{
+    var readyStateCheckInterval = setInterval(function()
+     {
+        if (document.readyState === "complete") 
+        {
+            clearInterval(readyStateCheckInterval);
+            zbierz();
+        }
+    }, 10);
+}
+function zbierz()
+{
+   
+    let params = new URLSearchParams(document.location.search);
+    
+    /*
+    let szerokosc = params.get('sz');
+    let wysokosc = params.get('wys');
+    let dlugosc = params.get('dl');
+    */
+    let _id = params.get('id');
+    let text= getCookie(_id);
+    console.log("JSON: ", text);
+    let i = 0;
+    let gChar;
+    let pChar;
+    let gChar_end;
+    let pChar_end;
+    let position;
+    let geometry;
+
+
+    while (text.length > 3) 
+    {
+        gChar = text.indexOf("G");
+        gChar_end = text.indexOf("}");
+        geometry = text.substr(gChar+2,gChar_end-4); 
+        text = text.substr(gChar_end+1);
+        pChar = text.indexOf("P");
+        pChar_end = text.indexOf("}");
+        position = text.substr(pChar+2,pChar_end-1);
+        text = text.substr(pChar_end+2);
+        console.log("geo= ",geometry);
+        console.log("pozyc= ", position.replaceAll('"',''));
+        obj_cr(geometry.replaceAll('"',"'"),position.replaceAll('"',''));
+    }
+
+
+}
+function getCookie(name) 
+{
+    // Split cookie string and get all individual name=value pairs in an array
+    var cookieArr = document.cookie.split(";");
+    
+    // Loop through the array elements
+    for(var i = 0; i < cookieArr.length; i++) 
+    {
+        var cookiePair = cookieArr[i].split("=");
+        
+        /* Removing whitespace at the beginning of the cookie name
+        and compare it with the given string */
+        if(name == cookiePair[0].trim()) 
+        {
+            // Decode the cookie value and return
+            return ( decodeURIComponent(cookiePair[1]));
+        }
+    }
+
+    // Return null if not found
+    return null;
+}
+function obj_cr(geo, pos)
+{
+//wczytanie zapisanych obiektow
+//wybór obiektow
+var scene = document.querySelector('a-scene');
+var newObj = document.createElement('a-entity');
+
+//kwadrat i rozmiar
+newObj.setAttribute('geometry',geo);
+newObj.setAttribute('position',pos+0.1);
+
+newObj.setAttribute('click-drag','');
+newObj.setAttribute('dynamic-body','mass:90000');
+newObj.setAttribute('material','color','blue');
+newObj.setAttribute('movable','');
+newObj.setAttribute('id',incr());
+newObj.setAttribute('collider','');
+//dodanie do sceny
+scene.appendChild(newObj);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 function DelObject(objID)
 {
     console.log(objID);
@@ -270,6 +375,7 @@ function save()
     
     
 }
+
 
 var incr = (function () {
     var i = 1;
