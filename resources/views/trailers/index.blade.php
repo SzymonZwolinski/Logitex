@@ -45,15 +45,14 @@
                                         <td>{{ $item->dostepnosc }}</td>
                                             {{$item->ladunek}}
                                         <td>
-<<<<<<< HEAD
+
                                             <input type="button" value="Kreuj zamówienie" onclick=" loadtrailer({{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }} )">
                                             <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Podgląd</button></a>
                                             <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button></a>
-=======
+
                                             <input type="button" value="Wybierz" onclick=" loadtrailer({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }} )">
                                             <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
->>>>>>> 818466394d44556b22c872cc3b5b31dd801ad350
                                             <form method="POST" action="{{ url('/trailers' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
