@@ -1,4 +1,4 @@
-<?php
+ <?php
 
 use Illuminate\Support\Facades\Route;
 
@@ -17,14 +17,27 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*Route::get('/trailers', function () {
+    return view('trailers');
+})->middleware(['auth'])->name('trailers');
 
+
+Route::get('/cars', function () {
+    return view('cars');
+})->middleware(['auth'])->name('cars');
+*/
 Route::resource('/trailers', App\Http\Controllers\TrailerController::class);
 
 Route::resource('/cars', App\Http\Controllers\CarController::class);
 
+
+require __DIR__.'/auth.php';
+=======
 Route::resource('/orders', App\Http\Controllers\OrderController::class);
 
 //Route::post('/orders',App\Http\Controllers\SaveOrderController::class@);
+

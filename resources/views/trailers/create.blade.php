@@ -1,7 +1,7 @@
 @extends('trailers.layout')
 @section('content')
 <div class="card">
-  <div class="card-header">Trailers Page</div>
+  <div class="card-header">Dodawanie nowej naczepy</div>
   <div class="card-body">
       
       <form action="{{ url('trailers/') }}" method="post">
@@ -20,7 +20,7 @@
         <input type="number" name="wysokosc" id="wysokosc" class="form-control"></br>
         <label>dostepnosc</label></br>
         <input type="number" name="dostepnosc" id="dostepnosc" class="form-control"></br>
-        <input type="submit" value="Save" class="btn btn-success"></br>
+        <input type="submit" value="Zapisz" class="btn btn-success"></br>
     </form>
   
   </div>

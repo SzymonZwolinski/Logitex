@@ -343,13 +343,17 @@ function save()
     let geometria;
     let identyfikator;
     let doZapisu;
+
+=======
     let params = new URLSearchParams(document.location.search);
     let id = params.get('tr');
+
     objtab.forEach (function(fun)
     {
         pozycja = JSON.stringify(fun.getAttribute('position'));
         geometria = JSON.stringify(fun.getAttribute('geometry'));
         identyfikator = fun.getAttribute('id');
+
         doZapisu = identyfikator.concat("G:",geometria,"P:",pozycja);
         saveArr.push(doZapisu);
     });
@@ -371,9 +375,8 @@ function save()
   
 
     xhr.send(toJSON);
-    
-    
-    
+     
+   
 }
 
 
