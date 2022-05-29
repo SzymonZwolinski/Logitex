@@ -129,6 +129,15 @@ function weightCh()
 {
     alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg");
 }
+
+function weigthLoad()
+{
+    let params = new URLSearchParams(document.location.search);
+    
+   
+    waga = params.get('wg');
+   
+}
 function wait_toload()
 {
     var readyStateCheckInterval = setInterval(function()
@@ -223,7 +232,6 @@ function obj_cr(geo, pos)
     var scene = document.querySelector('a-scene');
     var newObj = document.createElement('a-entity');
 
-    //kwadrat i rozmiar{'primitive':'box','height':1.2,'width':0.58333333,'depth':0.699999996}
     newObj.setAttribute('geometry',{'primitive':'box','height':myHeight,'width':myWidth,'depth':myDepth});
 
     newObj.setAttribute('click-drag','');
@@ -316,29 +324,7 @@ function move()
                 var size = clickdrag.getAttribute('heigh');
                 clickdrag.setAttribute('position',{x: position.x, y: size+0.1, z: position.z});
             }
-            /*
-            if(position.x <-10)
-            {
-                var size = clickdrag.getAttribute('width');
-                clickdrag.setAttribute('position',{x: -9+(size+0.01), y: position.y, z: position.z});
-            }
-            if(position.x >10)
-            {
-                var size = clickdrag.getAttribute('width');
-                clickdrag.setAttribute('position',{x: 10-(size-0.01), y: position.y, z: position.z});
-            }
-            if(position.z >10)
-            {
-                var size = clickdrag.getAttribute('depth');
-                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: 10-(size-0.01)});
-            }
-            if(position.z <-10)
-            {
-                console.log(position.z);
-                var size = clickdrag.getAttribute('depth');
-                clickdrag.setAttribute('position',{x: position.x, y: position.y, z: -9+(size+0.01)});
-            }
-            */
+           
             clickdrag.setAttribute('rotation','0');  
             clickdrag.body.velocity.set(0,0,0);
             clickdrag.body.angularVelocity.set(0,0,0);

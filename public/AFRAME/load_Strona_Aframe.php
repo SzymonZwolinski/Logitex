@@ -8,6 +8,15 @@
         function drpdedt() {
           document.getElementById("myDropdown").classList.toggle("show");
         }
+        function drpdadd() {
+          document.getElementById("addDropdown").classList.toggle("show");
+        }
+
+        function loadAndWeight()
+        {
+          load();
+          weigthLoad();
+        }
     </script>
     <script src="../js/obiekt.js" ></script>
     <script src="../js/kamer.js"></script>
@@ -16,14 +25,21 @@
     
     <link rel="stylesheet" href="../css/Aframe_buttons.css">
 </head>
-<body onload="load()">
+<body onload="loadAndWeight()">
     <?php
         echo '<script type="text/javascript">wait_toload()</script>';
     ?>
     <div id ="ui">
-      <input type="number" name="height" id="height" placeholder="wysokosc...">
-      <input type="number" name="witdth" id="width" placeholder="szerokosc...">
-      <input type="number" name="depth" id="depth" placeholder="glebokosc...">
+    <div class="dropdown">
+      <button onclick="drpdadd()" class="dropbtn">Dodaj Obiekt</button>
+        <div id="addDropdown" class="dropdown-content">
+          <input type="number" name="height" id="height" min="0.5" placeholder="wysokosc...">
+          <input type="number" name="witdth" id="width" min="0.5" placeholder="szerokosc...">
+          <input type="number" name="depth" id="depth" min="0.5" placeholder="glebokosc...">
+          <input type="number" name="weight" id="weight"  placeholder="ciężar...">
+          <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value,document.getElementById('weight').value)">
+        </div>
+    </div>
       <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value)">
 
         <input type="number" name="nr" id="nr" hidden>
@@ -38,7 +54,7 @@
                   <input type="button" name="edobiekt" value="Potwierdź" onclick="EditObject(document.getElementById('nr').value, document.getElementById('edit_height').value, document.getElementById('edit_width').value, document.getElementById('edit_depth').value)">
               </div>
         </div>
-      
+    <input type="button" name="weightCh" value="Sprawdz wagę" onClick="weightCh()">
     <input type="button" name="kamera2" value="Zamien Kamere" onclick="ChCam()">  
     <input type="button" name="zapis" value="Zapisz" onclick="save()">
   </div>
