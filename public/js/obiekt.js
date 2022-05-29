@@ -3,7 +3,10 @@
 
 var obj;
 var objtab =new Array();
+waga =0;
 
+let params = new URLSearchParams(document.location.search);
+let maksWaga = parseInt(params.get('wg'));
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
         /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
@@ -60,42 +63,72 @@ AFRAME.registerComponent('movable', {
 });
 
 
-function AddObject(wysokosc,szerokosc,glebokosc)
+function AddObject(wysokosc,szerokosc,glebokosc,ciezar) 
 {
-   if(isNaN(wysokosc) == true || wysokosc=="")
-   {
-       wysokosc=1.2;
-   }
-   if(isNaN(szerokosc) == true || szerokosc=="")
-   {
-        szerokosc=1;
-   }
-   if(isNaN(glebokosc) == true || glebokosc=="")
-   {
-       glebokosc = 1.2;
-   }
-  //wybór obiektow
-  var scene = document.querySelector('a-scene');
-  var newObj = document.createElement('a-entity');
+    
+    let akt_wg;
+    
 
-  //kwadrat i rozmiar
-  newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc*(0.58333333), 'depth':glebokosc*(0.58333333)});
+    if(isNaN(parseFloat(ciezar) ))
+    {
+            ciezar  =  800+25;//25 -> waga europalety
+    }   
+    else
+    {
+        
+        ciezar =parseFloat(ciezar)+25;
+    }
+    akt_wg = waga+ciezar;
+    if(akt_wg <maksWaga)
+    {
+        if(isNaN(parseFloat(wysokosc) ) )
+        {
+            wysokosc=1.2;
+        }
+        if(isNaN(parseFloat(szerokosc) ))
+        {
+                szerokosc=0.8;
+        }
+        if(isNaN(parseFloat(glebokosc)))
+        {
+            glebokosc = 1.2;
+        }
+       
 
-  //parametry
-  newObj.setAttribute('click-drag','');
-  newObj.setAttribute('dynamic-body','mass:90000');
-  newObj.setAttribute('material','color','blue');
-  newObj.setAttribute('position',{x:0, y:0.4, z:0});
-  newObj.setAttribute('movable','');
-  newObj.setAttribute('id',incr());
-  newObj.setAttribute('collider','');
+        /*
+        
+        */
+        waga = waga+parseInt(ciezar);
+        //wybór obiektow
+        var scene = document.querySelector('a-scene');
+        var newObj = document.createElement('a-entity');
+        
+        //kwadrat i rozmiar
+        newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc*(0.58333333), 'depth':glebokosc*(0.58333333)});
 
-  //dodanie do sceny
-  scene.appendChild(newObj);
+        //parametry
+        newObj.setAttribute('click-drag','');
+        newObj.setAttribute('dynamic-body','mass:90000');
+        newObj.setAttribute('material','color','blue');
+        newObj.setAttribute('position',{x:0, y:0.4, z:0});
+        newObj.setAttribute('movable','');
+        newObj.setAttribute('id',incr());
+        newObj.setAttribute('collider','');
+
+        //dodanie do sceny
+        scene.appendChild(newObj);
+    }
+    else
+    {
+        alert("Za duże obciążenie naczepy o "+ Math.abs(maksWaga-(akt_wg))+" Kg");
+    }
 
   
 }
-
+function weightCh()
+{
+    alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg");
+}
 function wait_toload()
 {
     var readyStateCheckInterval = setInterval(function()
@@ -204,17 +237,6 @@ function obj_cr(geo, pos)
     //dodanie do sceny
     scene.appendChild(newObj);
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 function DelObject(objID)
@@ -373,8 +395,10 @@ function save()
         saveArr.push(doZapisu);
     });
     let toJSON = JSON.stringify(saveArr);
-    //console.log("save jako json: ",toJSON);
-    toJSON = toJSON.concat(id);
+    toJSON = toJSON.concat(waga); // waga
+    toJSON = toJSON.concat(waga.toString().length);//długość wagi
+    toJSON = toJSON.concat(id); // nacczepa
+    toJSON = toJSON.concat(id.toString().length);
     var xhr = new XMLHttpRequest();    
     xhr.open("POST","./orderSave/saveOrder.php",true);
     xhr.setRequestHeader("Content-Type","application/json");
