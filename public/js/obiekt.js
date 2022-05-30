@@ -133,8 +133,6 @@ function weightCh()
 function weigthLoad()
 {
     let params = new URLSearchParams(document.location.search);
-    
-   
     waga = params.get('wg');
    
 }
@@ -383,7 +381,7 @@ function save()
     let toJSON = JSON.stringify(saveArr);
     toJSON = toJSON.concat(waga); // waga
     toJSON = toJSON.concat(waga.toString().length);//długość wagi
-    toJSON = toJSON.concat(id); // nacczepa
+    toJSON = toJSON.concat(id); // nacczepa 
     toJSON = toJSON.concat(id.toString().length);
     var xhr = new XMLHttpRequest();    
     xhr.open("POST","./orderSave/saveOrder.php",true);
@@ -400,6 +398,8 @@ function save()
   
 
     xhr.send(toJSON);
+
+    location.replace("../cars");
      
    
 }
