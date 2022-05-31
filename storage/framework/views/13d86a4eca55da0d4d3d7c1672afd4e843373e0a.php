@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="card">
-  <div class="card-header">Contactus Page</div>
+  <div class="card-header">Edycja naczepy</div>
   <div class="card-body">
       
       <form action="<?php echo e(url('trailers/' .$trailers->id)); ?>" method="post">
@@ -23,7 +23,7 @@
         <input type="number" name="wysokosc" id="wysokosc" value="<?php echo e($trailers->wysokosc); ?>" class="form-control"></br>
         <label>dostepnosc</label></br>
         <input type="number" name="dostepnosc" id="dostepnosc" value="<?php echo e($trailers->dostepnosc); ?>" class="form-control"></br>
-        <input type="submit" value="Update" class="btn btn-success"></br>
+        <input type="submit" value="Aktualizuj" class="btn btn-success"></br>
     </form>
   
   </div>

@@ -30,7 +30,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
     //newObj.removeAttribute('collide','');
     //kwadrat i rozmiar 2
     //Sciana z+
-    newObj1.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc*(1.46), 'width': szerokosc*(2), 'depth':dlugosc});
+    newObj1.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc*(1.75), 'width': szerokosc*(2), 'depth':dlugosc});
     newObj1.setAttribute('static-body','');
     newObj1.setAttribute('material','color','green');
     newObj1.setAttribute('position',{x:0, y:(wysokosc/2), z:(szerokosc/2)*(0.58333333),});
@@ -44,7 +44,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
     newObj2.setAttribute('rotation','0 -90 0');
     //kwadrat i rozmiar 4 
     //Sciana x+
-    newObj3.setAttribute('geometry',{'primitive': 'plane', 'height': (wysokosc)*(1.46), 'width': (szerokosc)*(2), 'depth':dlugosc});
+    newObj3.setAttribute('geometry',{'primitive': 'plane', 'height': (wysokosc)*(1.75), 'width': (szerokosc)*(2), 'depth':dlugosc});
     newObj3.setAttribute('static-body','');
     newObj3.setAttribute('material','color','magenta');
     newObj3.setAttribute('position',{x:0, y:(wysokosc/2), z:-(szerokosc/2)*(0.58333333)});
@@ -59,7 +59,7 @@ function addTrailer(szerokosc,wysokosc,dlugosc)
 
      //kwadrat i rozmiar 5 
     //Sufit
-    newObj5.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc*(1.46), 'width': szerokosc*(0.58333333), 'depth':dlugosc*(0.58333333)});
+    newObj5.setAttribute('geometry',{'primitive': 'plane', 'height': wysokosc*(1.75), 'width': szerokosc*(0.58333333), 'depth':dlugosc*(0.58333333)});
     newObj5.setAttribute('static-body','');
     newObj5.setAttribute('material','color','white');
     newObj5.setAttribute('position',{x:0, y:(wysokosc), z:0});

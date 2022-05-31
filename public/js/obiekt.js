@@ -91,13 +91,11 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar)
         }
         if(isNaN(parseFloat(glebokosc)))
         {
-            glebokosc = 1.2;
+            glebokosc = 0.8;
         }
        
 
-        /*
-        
-        */
+       
         waga = waga+parseInt(ciezar);
         //wybór obiektow
         var scene = document.querySelector('a-scene');
@@ -398,12 +396,14 @@ function save()
   
 
     xhr.send(toJSON);
-
-    location.replace("../cars");
-     
+    sleep(2000).then(() =>{location.replace("../cars");
+     });
+    
    
 }
-
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 var incr = (function () {
     var i = 1;
