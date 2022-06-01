@@ -21,18 +21,29 @@
                                         <th>marka</th>
                                         <th>model</th>
                                         <th>dopuszczalna_masa</th>
-                                        <th>P_dostepnosc</th>
+                                        <th>aktualna_masa</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                @foreach($cars as $item)
+
+                                <div style="display: none">
+                                    {{
+
+                                        $tir = DB::table('cars')
+                                    ->selectRaw('id, marka, model, dopuszczalna_masa, (select waga from orders order by id desc limit 1) as aktualna_masa')
+                                    ->whereRaw('dopuszczalna_masa >= (select waga from orders order by id desc limit 1) AND P_dostepnosc =1')
+                                    ->get();
+                                    }}</div>
+                                @foreach($tir as $item)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->marka }}</td>
                                         <td>{{ $item->model }}</td>
                                         <td>{{ $item->dopuszczalna_masa }}</td>
-                                        <td>{{ $item->P_dostepnosc }}</td>
+                                        <td>{{ $item->aktualna_masa}}</td>
+                               
                                         <td>
+                                            <a href="{{url('/finalOrders/') }}" title="wybierz"><button class="bttn wybierz"><i class="fa wybierz" aria-hidden="true"></i>Wybierz</button></a>
                                             <a href="{{ url('/cars/' . $item->id) }}" title="View Vehicle"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Podgląd</button></a>
                                             <a href="{{ url('/cars/' . $item->id . '/edit') }}" title="Edit Vehicle"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button></a>
                                             <form method="POST" action="{{ url('/vehicle' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
