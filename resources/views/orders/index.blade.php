@@ -25,6 +25,7 @@
                                         <th>#</th>
                                         <th>waga</th>
                                         <th>naczepa</th>
+                                        <th>ID_ZAMOWIENIA</th>
                                         <th>szerokosc</th>
                                         <th>dlugosc</th>
                                         <th>wysokosc</th>
@@ -37,7 +38,7 @@
                                         <div style="display: none">
                                  
                                         {{$data = DB::table('orders as o')
-                                ->select('o.id','o.trailer','o.waga','t.szerokosc', 't.dlugosc', 't.wysokosc','o.ladunek')
+                                ->select('o.id','o.trailer',"o.ID_ZAMOWIENIA",'o.waga','t.szerokosc', 't.dlugosc', 't.wysokosc','o.ladunek')
                                 ->join('trailers as t', 'o.trailer', '=', 't.id')
                                 ->get();}}
                                
@@ -47,6 +48,7 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->waga }}</td>
                                         <td>{{ $item->trailer }}</td>
+                                        <td>{{ $item->ID_ZAMOWIENIA}}</td>
                                         <td>{{ $item->szerokosc }}</td>
                                         <td>{{ $item->dlugosc }}</td>
                                         <td>{{ $item->wysokosc }}</td>

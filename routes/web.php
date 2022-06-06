@@ -39,5 +39,6 @@ require __DIR__.'/auth.php';
 
 Route::resource('/orders', App\Http\Controllers\OrderController::class);
 Route::resource('/finalOrders', App\Http\Controllers\FinalOrdersController::class);
+Route::resource('/final_order_location', App\Http\Controllers\final_order_locationController::class);
 //Route::post('/orders',App\Http\Controllers\SaveOrderController::class@);
 

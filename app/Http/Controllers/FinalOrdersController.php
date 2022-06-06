@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\finalOrder;
+use App\Models\order;
 use Illuminate\Support\Facades\DB;
 
 
@@ -26,12 +27,16 @@ class FinalOrdersController extends Controller
         return view('finalOrders.create');
     }
   
-    public function store(Request $request,$id)
+    public static function store($id,$uuid)
     {
-        $input = DB::raw('SELECT trailer,id,?, waga, ROUND ((LENGTH(ladunek)- LENGTH( REPLACE ( ladunek, "}", "")))/2) as iloscPalet,CURRENT_TIMESTAMP FROM orders', [$id]);
+        $suma_wag = DB::raw('select suma_wag from orders where ID_ZAMOWIENIA = :somevariable',array('somevariable'=> $uuid));
+        $trailer = DB::raw('select trailer from orders where ID_ZAMOWIENIA = :somevariable',array('somevariable'=> $uuid));
+        $ilosc = DB::raw('select COUNT(*)  from orders where ID_ZAMOWIENIA = :somevariable',array('somevariable'=> $uuid));
+        DB::raw('insert into final_orders values (default, ?,?,?,?,?,current_timestamp)',['$trailer','$id','$uuid','$suma_wag','$ilosc']);
 
-        finalOrder::create($input);
-        return redirect('finalOrders')->with('flash_message', 'Order Addedd!');  
+        //return redirect('finalOrders')->with('flash_message', 'Order Addedd!');  
+        $data = FinalOrder::orderByDesc('id')->limit(1)->get();
+        return view ('finalOrders.index')->with('data',$data);
     }
     
     public function show($id)
