@@ -50,7 +50,7 @@
                                         
                                        
                                         <td>
-                                            <a href="{{ url('/finalOrder/' . $item->id)
+
                                         <input type="button" value="Wybierz" onclick=" loadOrder({{$item->id}},{{$item->trailer}},{{ $item->szerokosc}},{{ $item->dlugosc}} ,{{ $item->wysokosc }},{{$item->waga}},{{json_encode($item->ladunek)}})">
                                             <a href="{{ url('/orders/' . $item->id) }}" title="View order"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <a href="{{ url('/orders/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>

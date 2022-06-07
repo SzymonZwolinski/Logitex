@@ -26,11 +26,13 @@
           <input type="number" name="witdth" id="width" min="0.5" placeholder="szerokosc...">
           <input type="number" name="depth" id="depth" min="0.5" placeholder="glebokosc...">
           <input type="number" name="weight" id="weight"  placeholder="ciężar...">
-          <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value,document.getElementById('weight').value)">
+          <input type="text" name="Nadawca" id="Nadawca"  placeholder="Nazwa Nadawcy...">
+          <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value,document.getElementById('weight').value,document.getElementById('Nadawca').value)">
         </div>
-    </div>
+    </div>  
         <input type="number" name="nr" id="nr" hidden>
         <input type="submit" name="del" value="Skasuj obiekt" onclick="DelObject(document.getElementById('nr').value)" >
+        <input type="submit" name="ch" value="Sprawdź obiekt" onclick="ChObject(document.getElementById('nr').value)" >
 
         <div class="dropdown">
             <button onclick="drpdedt()" class="dropbtn">Edytuj Obiekt</button>
