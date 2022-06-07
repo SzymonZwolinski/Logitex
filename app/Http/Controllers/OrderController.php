@@ -1,13 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 
 
@@ -26,7 +22,7 @@ class OrderController extends Controller
 
     public function index()
     {
-        $request->authenticate();
+    
         $orders = Order::all();
         if(auth()->user()->type == 1){
             return view ('orders.index')->with('orders', $orders);
