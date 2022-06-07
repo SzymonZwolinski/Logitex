@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Trailer;
+use App\Providers\RouteServiceProvider;
 
 class TrailerController extends Controller
 {
@@ -22,7 +23,13 @@ class TrailerController extends Controller
     public function index()
     {
         $trailers = Trailer::all();
-        return view ('trailers.index')->with('trailers', $trailers);
+        if(auth()->user()->type == 1){
+            return view ('trailers.index')->with('trailers', $trailers);
+        } 
+        else{
+            return redirect()->intended(RouteServiceProvider::USER_HOME);
+        }
+        
     }
     
     public function create()
