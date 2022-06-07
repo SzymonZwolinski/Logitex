@@ -61,6 +61,8 @@ Route::resource('/trailers', App\Http\Controllers\TrailerController::class);
 
 Route::resource('/cars', App\Http\Controllers\CarController::class);
 
+Route::resource('/usersmanagement', App\Http\Controllers\UsersManagementController::class);
+
 
 require __DIR__.'/auth.php';
 Route::resource('/naczepy', App\Http\Controllers\naczepaController::class);
