@@ -138,7 +138,8 @@ function weightCh()
 function weigthLoad()
 {
     let params = new URLSearchParams(document.location.search);
-    waga = params.get('wg');
+    //maksWaga = params.get('wg');
+    waga = params.get('akwg');
    
 }
 function wait_toload()
@@ -173,19 +174,38 @@ function zbierz()
     let position;
     let geometry;
 
-
-    while (text.length > 3) 
+    let nChar;
+    let wChar;
+    let N;
+    let W;
+    let endChar;
+    while (text.length>1 ) 
     {
+        i = i+1;
         gChar = text.indexOf("G");
         gChar_end = text.indexOf("}");
-        geometry = text.substr(gChar+2,gChar_end-4); 
+        geometry = text.substr(gChar+2,(gChar_end-gChar)-1); 
+
         text = text.substr(gChar_end+1);
+
         pChar = text.indexOf("P");
         pChar_end = text.indexOf("}");
-        position = text.substr(pChar+2,pChar_end-1);
-        text = text.substr(pChar_end+2);
 
-        obj_cr(geometry.replaceAll(`"`,`'`),position.replaceAll('"',''));
+        position = text.substr(pChar+2,(pChar_end-pChar)-1);
+        text = text.substr(pChar_end+1);
+
+        nChar = text.indexOf("N");
+        wChar = text.indexOf("W");
+
+        N = text.substr(nChar+3,(wChar-nChar)-4);
+        text = text.substr(wChar+3);
+        endChar = text.indexOf('"');
+        W = text.substr(0,endChar);
+
+
+        
+        obj_cr(geometry.replaceAll(`"`,`'`),position.replaceAll('"',''),N,W);
+       
     }
 
 
@@ -212,7 +232,7 @@ function getCookie(name)
     // Return null if not found
     return null;
 }
-function obj_cr(geo, pos)
+function obj_cr(geo, pos, n, w)
 {
     let _x = pos.indexOf("x");
     let _y = pos.indexOf("y");
@@ -241,7 +261,8 @@ function obj_cr(geo, pos)
     newObj.setAttribute('dynamic-body','mass:90000');
     newObj.setAttribute('material','color','white');
     newObj.setAttribute('position',{x:myX, y:myY, z:myZ});
-
+    newObj.setAttribute('weight', w);
+    newObj.setAttribute('name',n);
     newObj.setAttribute('movable','');
     newObj.setAttribute('id',incr());
     newObj.setAttribute('collider','');
