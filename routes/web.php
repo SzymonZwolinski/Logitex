@@ -38,6 +38,6 @@ Route::resource('/cars', App\Http\Controllers\CarController::class);
 require __DIR__.'/auth.php';
 
 Route::resource('/orders', App\Http\Controllers\OrderController::class);
-
+Route::resource('/finalOrders', App\Http\Controllers\FinalOrdersController::class);
 //Route::post('/orders',App\Http\Controllers\SaveOrderController::class@);
 

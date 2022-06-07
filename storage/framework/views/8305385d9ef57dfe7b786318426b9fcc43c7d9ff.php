@@ -1,7 +1,7 @@
 
 <?php $__env->startSection('content'); ?>
 <div class="card">
-  <div class="card-header">Trailers Page</div>
+  <div class="card-header">Podgląd informacji o naczepie</div>
   <div class="card-body">
   
         <div class="card-body">

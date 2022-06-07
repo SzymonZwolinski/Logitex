@@ -415,7 +415,9 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
+
             'reference' => '0db1af2517a4d81b0e3ea49353201a6bb3e15bcf',
+
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(
