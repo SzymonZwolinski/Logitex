@@ -1,9 +1,9 @@
-function loadOrder(id,trailer,szerokosc, dlugosc, wysokosc,waga,ladunek)
+function loadOrder(id,trailer,szerokosc, dlugosc, wysokosc,waga,akt_wg,ladunek)
 {
 
 
    setCookie(id,ladunek,1);
-   window.location.href = '/AFRAME/load_Strona_Aframe.php?sz='+szerokosc+'&wys='+wysokosc+'&dl='+dlugosc+'&wg='+waga+'&tr='+trailer+"&id="+id;
+   window.location.href = '/AFRAME/load_Strona_Aframe.php?sz='+szerokosc+'&wys='+wysokosc+'&dl='+dlugosc+'&wg='+waga+'&akwg='+akt_wg+'&tr='+trailer+"&id="+id;
 }
 
 function setCookie(name, value, daysToLive) {
