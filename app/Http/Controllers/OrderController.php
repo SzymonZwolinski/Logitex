@@ -1,10 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Providers\RouteServiceProvider;
 
 
 class OrderController extends Controller
@@ -22,8 +26,15 @@ class OrderController extends Controller
 
     public function index()
     {
+        $request->authenticate();
         $orders = Order::all();
-        return view ('orders.index')->with('orders', $orders);
+        if(auth()->user()->type == 1){
+            return view ('orders.index')->with('orders', $orders);
+        } 
+        else{
+            return redirect()->intended(RouteServiceProvider::USER_HOME);
+        }
+        
     }
     
     public function create()
@@ -35,6 +46,7 @@ class OrderController extends Controller
     {
         $input = $request->all();
         Order::create($input);
+
         return redirect('orders')->with('flash_message', 'Order Addedd!');  
     }
     
