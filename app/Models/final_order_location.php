@@ -10,7 +10,7 @@ class final_order_location extends Model
     
     protected $table = 'final_orders_location';
     protected $primaryKey = 'id';
-    protected $fillable = ['id_zamowienia','nadawca', 'kraj','miasto'];
+    protected $fillable = ['id_zamowienia','nadawca', 'kraj','miasto','opis'];
     public $timestamps = false;
 
 }
