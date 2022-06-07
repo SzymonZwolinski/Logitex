@@ -13,17 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('role_user', function (Blueprint $table) {
+        Schema::create('final_orders', function (Blueprint $table) {
             $table->id();
-            $table->foreign('role_id')
+            $table->foreignId('id_naczepy')
                 ->references('id')
-                ->on('roles')
-                ->onDelete('cascade');
-            $table->foreign('user_id')
+                ->on('trailers');
+            $table->foreignId('id_pojazdu')
                 ->references('id')
-                ->on('users')
-                ->onDelete('cascade');
-            $table->timestamps();
+                ->on('cars');
+            $table->foreignId('id_zamowienia')
+                ->references('id')
+                ->on('orders');
+            $table->integer('waga');
+            $table->integer('ilosc_ladunku');
         });
     }
 
@@ -34,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('role_user');
+        Schema::dropIfExists('final_orders');
     }
 };
