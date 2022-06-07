@@ -31,13 +31,16 @@
                                 <tbody>
 
                                 <div style="display: none"> 
-                                    <?php $components = strval($_GET['uuid']); ?>
+                                    <?php if(isset($_GET['uuid']))
+                                    {
+                                        $components = strval($_GET['uuid']);
+                                     } ?>
                                     {{
                                       
 
                                     $tir = DB::table('cars')
                                     ->selectRaw('id, marka, model, dopuszczalna_masa, (select suma_wag from orders where ID_ZAMOWIENIA = :somevariable limit 1 ) as aktualna_masa',array('somevariable'=> $components))
-                                    ->whereRaw('dopuszczalna_masa >= (select waga from orders order by id desc limit 1) AND P_dostepnosc =1')
+                                    ->whereRaw('(dopuszczalna_masa >= (select waga from orders order by id desc limit 1)) AND P_dostepnosc =1')
                                     ->get();
                                     }}</div>
                                     <?php $components = '"'.$components.'"';?>
@@ -51,7 +54,7 @@
                                
                                         <td>
                                         
-                                            <a href="{{url('/final_order_location/create')}}"><button type="button" name="wybierz" value="wybierz" onclick="zapis({{$item->id}},{{ $components }})">Wybierz</button></a>
+                                           <button type="button" name="wybierz" value="wybierz" onclick="zapis({{$item->id}},{{ $components }})">Wybierz</button>
                                             <a href="{{ url('/cars/' . $item->id) }}" title="View Vehicle"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Podgląd</button></a>
                                             <a href="{{ url('/cars/' . $item->id . '/edit') }}" title="Edit Vehicle"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button></a>
                                             <form method="POST" action="{{ url('/vehicle' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">

@@ -8,6 +8,8 @@
         {!! csrf_field() !!}
         <label>id_zamowienia</label></br>
         <input type="text" name="id_zamowienia" id="id_zamowienia" class="form-control"></br>
+        <label>nadawca</label></br>
+        <input type="text" name="nadawca" id="nadawca" class="form-control"></br>
         <label>kraj</label></br>
         <input type="text" name="kraj" id="kraj" class="form-control"></br>
         <label>miasto</label></br>

@@ -38,7 +38,11 @@ class final_order_locationController extends Controller
         return redirect('final_order_location')->with('flash_message', 'final__order_location Addedd!');  
     }
 
-    
+    public function show()
+    {
+        
+        return view ('final_order_location.show');
+    }
 
 
 
