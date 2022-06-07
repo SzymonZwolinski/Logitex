@@ -12,10 +12,7 @@
                     <div class="card-header">
                         <h2>Lista naczep w firmie</h2>
                     </div>
-                    <div class="card-body">
-                        <a href="<?php echo e(url('/trailers/create')); ?>" class="btn btn-success btn-sm" title="Add New Trailer">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Dodaj naczepe
-                        </a>
+                    
                         <br/>
                         <br/>
                         <div class="table-responsive">

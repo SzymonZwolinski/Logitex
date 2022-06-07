@@ -12,10 +12,7 @@
                     <div class="card-header">
                         <h2>Zamówienia</h2>
                     </div>
-                    <div class="card-body">
-                        <a href="{{ url('/orders/create') }}" class="btn btn-success btn-sm" title="Add New order">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                        </a>
+                   
                         <br/>
                         <br/>
                         <div class="table-responsive">
@@ -57,8 +54,6 @@
                                         <div style="display: none">{{$item ->ladunek}}</div>
                                         <td>
                                         <input type="button" value="Wybierz" onclick=" loadOrder({{$item->id}},{{$item->trailer}},{{ $item->szerokosc}},{{ $item->dlugosc}} ,{{ $item->wysokosc }},{{$item->waga}},{{$item->suma_wag}},{{json_encode($item->ladunek)}})">
-                                            <a href="{{ url('/orders/' . $item->id) }}" title="View order"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/orders/' . $item->id . '/edit') }}" title="Edit order"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
                                             <form method="POST" action="{{ url('/orders' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}

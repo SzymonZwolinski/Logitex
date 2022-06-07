@@ -11,10 +11,7 @@
                     <div class="card-header">
                         <h2>Lista pojazdów w firmie</h2>
                     </div>
-                    <div class="card-body">
-                        <a href="{{ url('/final_order_location/create') }}" class="btn btn-success btn-sm" title="Add New Vehicle">
-                            <i class="fa fa-plus" aria-hidden="true"></i> Dodaj pojazd
-                        </a>
+
                         <br/>
                         <br/>
                         <div class="table-responsive">
