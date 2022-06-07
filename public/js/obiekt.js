@@ -63,7 +63,7 @@ AFRAME.registerComponent('movable', {
 });
 
 
-function AddObject(wysokosc,szerokosc,glebokosc,ciezar) 
+function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma) 
 {
     
     let akt_wg;
@@ -81,6 +81,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar)
     akt_wg = waga+ciezar;
     if(akt_wg <maksWaga)
     {
+        firma = firma.toString();
         if(isNaN(parseFloat(wysokosc) ) )
         {
             wysokosc=1.2;
@@ -92,6 +93,10 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar)
         if(isNaN(parseFloat(glebokosc)))
         {
             glebokosc = 0.8;
+        }
+        if(firma.length == 0)
+        {
+            firma = generateUUID();
         }
        
 
@@ -112,6 +117,8 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar)
         newObj.setAttribute('movable','');
         newObj.setAttribute('id',incr());
         newObj.setAttribute('collider','');
+        newObj.setAttribute('weight', ciezar    );
+        newObj.setAttribute('name',firma);
 
         //dodanie do sceny
         scene.appendChild(newObj);
@@ -260,6 +267,25 @@ function DelObject(objID)
 
 }
 
+function ChObject(objID)
+{
+    var chObj = document.getElementById(objID);
+    if(chObj!=null)
+    {
+       var height = chObj.getAttribute('geometry').height;
+       var width = chObj.getAttribute('geometry').width;
+       var depth = chObj.getAttribute('geometry').depth;
+       var nadawca = chObj.getAttribute('name');
+       var weight = chObj.getAttribute('weight');
+       alert("\nWysokość: "+ height*(0.58333333) +"\nSzerokość: "+ width*(0.58333333)+"\nGłębokość: " +depth*(0.58333333) + "\nWaga: " + weight + '\nNadawca: "' + nadawca+'"');
+       
+    }
+    else
+    {
+        alert("Brak obiektu do sprawdzenia!");
+    }
+}
+
 function EditObject(objID,wysokosc,szerokosc,glebokosc)
 {
     console.log(objID);
@@ -366,21 +392,21 @@ function save()
 
     let params = new URLSearchParams(document.location.search);
     let id = params.get('tr');
-
     objtab.forEach (function(fun)
     {
         pozycja = JSON.stringify(fun.getAttribute('position'));
         geometria = JSON.stringify(fun.getAttribute('geometry'));
+        nadawca = JSON.stringify(fun.getAttribute('name'));
+        _Waga = JSON.stringify(fun.getAttribute('weight'));
         identyfikator = fun.getAttribute('id');
-
-        doZapisu = identyfikator.concat("G:",geometria,"P:",pozycja);
+        doZapisu = identyfikator.concat("G:",geometria,"P:",pozycja,"N:",nadawca,"W:",_Waga);
         saveArr.push(doZapisu);
     });
+    let UUID = generateUUID();
+    saveArr.push(waga, id,UUID);
     let toJSON = JSON.stringify(saveArr);
-    toJSON = toJSON.concat(waga); // waga
-    toJSON = toJSON.concat(waga.toString().length);//długość wagi
-    toJSON = toJSON.concat(id); // nacczepa 
-    toJSON = toJSON.concat(id.toString().length);
+    console.log(JSON.parse(toJSON));
+   
     var xhr = new XMLHttpRequest();    
     xhr.open("POST","./orderSave/saveOrder.php",true);
     xhr.setRequestHeader("Content-Type","application/json");
@@ -394,9 +420,10 @@ function save()
         }
       }
   
-
+      
     xhr.send(toJSON);
-    sleep(2000).then(() =>{location.replace("../cars");
+    
+    sleep(2000).then(() =>{location.replace("../cars"+"?&uuid="+UUID);
      });
     
    
@@ -417,3 +444,19 @@ var incr2 = (function () {
         return i++;
     }
 })();
+
+function generateUUID() { // Public Domain/MIT
+    var d = new Date().getTime();//Timestamp
+    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16;//random number between 0 and 16
+        if(d > 0){//Use timestamp until depleted
+            r = (d + r)%16 | 0;
+            d = Math.floor(d/16);
+        } else {//Use microseconds since page-load if supported
+            r = (d2 + r)%16 | 0;
+            d2 = Math.floor(d2/16);
+        }
+        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+    });
+}
