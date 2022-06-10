@@ -41,8 +41,6 @@
           <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value,document.getElementById('weight').value,document.getElementById('Nadawca').value)">
         </div>
     </div>
-      <input type="button" name="dodobiekt" value="Dodaj obiekt" onclick="AddObject(document.getElementById('height').value,document.getElementById('width').value,document.getElementById('depth').value)">
-
         <input type="number" name="nr" id="nr" hidden>
         <input type="submit" name="del" value="Skasuj obiekt" onclick="DelObject(document.getElementById('nr').value)" >
         <input type="submit" name="ch" value="Sprawdź obiekt" onclick="ChObject(document.getElementById('nr').value)" >

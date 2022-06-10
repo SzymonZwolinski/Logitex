@@ -21,6 +21,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>waga</th>
+                                        <th>Wolne miejsce</th>
                                         <th>naczepa</th>
                                         <th>ID_ZAMOWIENIA</th>
                                         <th>szerokosc</th>
@@ -35,7 +36,7 @@
                                         <div style="display: none">
                                  
                                         {{$data = DB::table('orders as o')
-                                ->selectRaw('o.id, o.trailer, o.ID_ZAMOWIENIA, o.suma_wag, t.szerokosc, t.dlugosc, t.wysokosc, GROUP_CONCAT(o.ladunek) AS ladunek, t.waga')
+                                ->selectRaw('o.id, o.trailer, o.ID_ZAMOWIENIA, o.suma_wag,o.kubatura, t.szerokosc, t.dlugosc, t.wysokosc, GROUP_CONCAT(o.ladunek) AS ladunek, t.waga')
                                 ->join('trailers as t', 'o.trailer', '=', 't.id')->groupBy('o.ID_ZAMOWIENIA')
                                 ->get();
                                 }}
@@ -45,6 +46,7 @@
                                 @foreach($data as $item)
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->suma_wag }}</td>
+                                        <td>{{ $item->kubatura }}</td>
                                         <td>{{ $item->trailer }}</td>
                                         <td>{{ $item->ID_ZAMOWIENIA}}</td>
                                         <td>{{ $item->szerokosc }}</td>

@@ -21,10 +21,11 @@
                                         <th>#</th>
                                         <th>naczepa</th>
                                         <th>tir</th>
-                                        <th>zamowienie</th>
+                                        <th>Id zamówienia</th>
                                         <th>waga</th>
-                                        <th>ilosc_ladunku</th>
-                                        <th>data_dodania</th>
+                                        <th>ilosc ladunku</th>
+                                        <th>wolne miejsce (m^2)</th>
+                                        <th>data dodania</th>
 
                                     </tr>
                                 </thead>
@@ -38,10 +39,10 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->id_naczepy }}</td>
                                         <td>{{ $item->id_pojazdu }}</td>
-                                        <td>{{ $item->id_pojazdu }}</td>
                                         <td>{{ $item->id_zamowienia }}</td>
                                         <td>{{ $item->waga }}</td>
                                         <td>{{ $item->ilosc_ladunku }}</td>
+                                        <td>{{$item->kubatura}}</td>
                                         <td>{{ $item->data_dodania }}</td>
                                         
                                        
