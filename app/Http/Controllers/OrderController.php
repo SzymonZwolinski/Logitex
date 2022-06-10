@@ -24,12 +24,8 @@ class OrderController extends Controller
     {
     
         $orders = Order::all();
-        if(auth()->user()->type == 1){
             return view ('orders.index')->with('orders', $orders);
-        } 
-        else{
-            return redirect()->intended(RouteServiceProvider::USER_HOME);
-        }
+       
         
     }
     

@@ -23,13 +23,9 @@ class TrailerController extends Controller
     public function index()
     {
         $trailers = Trailer::all();
-        if(auth()->user()->type == 1){
-            return view ('trailers.index')->with('trailers', $trailers);
-        } 
-        else{
-            return redirect()->intended(RouteServiceProvider::USER_HOME);
-        }
         
+            return view ('trailers.index')->with('trailers', $trailers);
+       
     }
     
     public function create()
