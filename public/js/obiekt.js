@@ -9,6 +9,7 @@ let params = new URLSearchParams(document.location.search);
 let maksWaga = parseInt(params.get('wg'));
 let kubaturaMax = parseInt(params.get('sz')*params.get('dl'));
 let kubaturaAkt =0;
+
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
         /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
@@ -136,6 +137,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
 
         //dodanie do sceny
         scene.appendChild(newObj);
+        document.getElementById('kubatur').value = kubaturaMax-kubaturaAkt;
     }
     else
     {
@@ -146,7 +148,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
 }
 function weightCh()
 {
-    alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg"+kubaturaAkt);
+    alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg");
 }
 
 function weigthLoad()
