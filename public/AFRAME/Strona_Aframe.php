@@ -47,7 +47,7 @@
     <input type="button" name="kamera2" value="Zamien Kamere" onclick="ChCam()">  
     <input type="button" name="zapis" value="Zapisz" onclick="save()">
     <div style="display: inline"   >
-      Kubatura: <input type="value" id="kubatur" name="kubatura"   disabled>
+      Pozostałe miejsce (m^2): <input type="value" id="kubatur" name="kubatura"   disabled>
     </div>   
   </div>
     <a-scene fog  renderer="precision: low; antialias:false;" >

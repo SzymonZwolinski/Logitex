@@ -21,7 +21,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>waga</th>
-                                        <th>Wolne miejsce</th>
+                                        <th>Wolne miejsce (m^2)</th>
                                         <th>naczepa</th>
                                         <th>ID_ZAMOWIENIA</th>
                                         <th>szerokosc</th>
