@@ -5,6 +5,8 @@ function load()
     let wysokosc = params.get('wys');
     let dlugosc = params.get('dl');
     console.log(szerokosc ,wysokosc, dlugosc);
+    document.getElementById('kubatur').value = (szerokosc*dlugosc);
+
     addTrailer(szerokosc,wysokosc,dlugosc);
     
 }

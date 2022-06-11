@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,11 +32,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-/*
+
 Route::get('/admin', function () {
     return view('admin');
 })->middleware(['auth'])->name('admin');
-
+/*
 Route::get('/user', function () {
     return view('user');
 })->middleware(['auth'])->name('user');
@@ -47,6 +48,7 @@ Route::get('/dashboard', function () {
 Route::get('/user', function () {
     return view('user');
 })->middleware(['auth'])->name('user');
+
 
 /*Route::get('/trailers', function () {
     return view('trailers');

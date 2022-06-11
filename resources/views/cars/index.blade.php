@@ -9,7 +9,8 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Lista pojazdów w firmie</h2>
+                        <h2>Kreator zamówień</h2>
+						<h3>Krok 3: Wybierz tir</h3>
                     </div>
 
                         <br/>
@@ -37,7 +38,7 @@
 
                                     $tir = DB::table('cars')
                                     ->selectRaw('id, marka, model, dopuszczalna_masa, (select suma_wag from orders where ID_ZAMOWIENIA = :somevariable limit 1 ) as aktualna_masa',array('somevariable'=> $components))
-                                    ->whereRaw('(dopuszczalna_masa >= (select waga from orders order by id desc limit 1)) AND P_dostepnosc =1')
+                                    ->whereRaw('(dopuszczalna_masa >= (select suma_wag from orders order by id desc limit 1)) AND P_dostepnosc =1')
                                     ->get();
                                     }}</div>
                                     <?php $components = '"'.$components.'"';?>

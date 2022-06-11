@@ -10,7 +10,8 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Lista naczep w firmie</h2>
+                        <h2>Kreator zamówień</h2>
+						<h3>Krok 1: Wybierz naczepę</h3>
                     </div>
                     
                         <br/>

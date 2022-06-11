@@ -7,6 +7,9 @@ waga =0;
 
 let params = new URLSearchParams(document.location.search);
 let maksWaga = parseInt(params.get('wg'));
+let kubaturaMax = parseInt(params.get('sz')*params.get('dl'));
+let kubaturaAkt =0;
+
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
         /* Podczas najazdu kursora na obiekt, jego ID przekazywane jest do funckji 
@@ -79,7 +82,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         ciezar =parseFloat(ciezar)+25;
     }
     akt_wg = waga+ciezar;
-    if(akt_wg <maksWaga)
+    if((maksWaga-akt_wg) >= 0)
     {
         firma = firma.toString();
         if(isNaN(parseFloat(wysokosc) ) )
@@ -98,9 +101,21 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         {
             firma = generateUUID();
         }
+       kubaturaAkt = kubaturaAkt + (szerokosc*glebokosc);
+        if( (kubaturaMax - kubaturaAkt) < 0)
+        {
+            alert("Podany obiekt przekracza pojemność")
+            return;
+        }
        
-
-       
+        if(szerokosc > 1.2)
+        {
+            ciezar = ciezar+25;
+        }
+        if(glebokosc > 1.2)
+        {
+            ciezar=ciezar+25;
+        }
         waga = waga+parseInt(ciezar);
         //wybór obiektow
         var scene = document.querySelector('a-scene');
@@ -122,6 +137,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
 
         //dodanie do sceny
         scene.appendChild(newObj);
+        document.getElementById('kubatur').value = kubaturaMax-kubaturaAkt;
     }
     else
     {
@@ -279,6 +295,8 @@ function DelObject(objID)
     if(rmObj!=null)
     {
         console.log(rmObj);
+        waga = waga - rmObj.getAttribute('weight');
+        
         scene.removeChild(rmObj);
     }
     else
@@ -403,8 +421,12 @@ function kolizja()
 
 }
 
+let saveCounter =0;
 function save()
 {
+    if(saveCounter ==0)
+    {
+        saveCounter = 1;
     let saveArr = new Array();
     let pozycja;
     let geometria;
@@ -424,7 +446,7 @@ function save()
         saveArr.push(doZapisu);
     });
     let UUID = generateUUID();
-    saveArr.push(waga, id,UUID);
+    saveArr.push(waga, id,UUID,(kubaturaMax-kubaturaAkt));
     let toJSON = JSON.stringify(saveArr);
     console.log(JSON.parse(toJSON));
    
@@ -446,7 +468,12 @@ function save()
     
     sleep(2000).then(() =>{location.replace("../cars"+"?&uuid="+UUID);
      });
-    
+    }
+    else
+    {
+        alert("Zapis trwa dalej")
+    }
+
    
 }
 function sleep(ms) {

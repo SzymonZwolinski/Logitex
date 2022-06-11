@@ -11,24 +11,34 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+               <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Menu główne') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('cars.index')" :active="request()->routeIs('cars.index')">
+                    <x-nav-link :href="route('tir.index')" :active="request()->routeIs('tir.index')">
                         {{ __('Pojazdy') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('trailers.index')" :active="request()->routeIs('trailers.index')">
+                    <x-nav-link :href="route('naczepy.index')" :active="request()->routeIs('naczepy.index')">
                         {{ __('Naczepy') }}
                     </x-nav-link>
-                    <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                    <x-nav-link :href="route('finalOrders.index')" :active="request()->routeIs('finalOrders.index')">
                         {{ __('Zamówienia') }}
                     </x-nav-link>
                     <x-nav-link :href="route('usersmanagement.index')" :active="request()->routeIs('usersmanagement.index')">
                         {{ __('Lista użytkowników') }}
                     </x-nav-link>
+					<x-nav-link :href="route('trailers.index')" :active="request()->routeIs('trailers.index')">
+                        {{ __('Kreator zamówień') }}
+                    </x-nav-link>
+					<x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.index')">
+                        {{ __('Wczytaj zamówienie') }}
+                    </x-nav-link>
+					 <x-nav-link :href="route('final_order_location.index')" :active="request()->routeIs('final_order_location.index')">
+                        {{ __('Kierunek transportu') }}
+                    </x-nav-link>
                 </div>
             </div>
+
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">

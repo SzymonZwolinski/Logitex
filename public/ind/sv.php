@@ -7,7 +7,7 @@ $conn = new mysqli("localhost","root","","logitex");
     array_pop($obj);
     $id = end($obj);
 
-    $sql = "SELECT trailer, suma_wag, (SELECT COUNT(*) FROM orders WHERE ID_ZAMOWIENIA ='".$uuid."') as ilosc FROM orders WHERE ID_ZAMOWIENIA = '".$uuid."' LIMIT 1;";
+    $sql = "SELECT trailer, suma_wag, (SELECT kubatura FROM orders WHERE ID_ZAMOWIENIA LIKE '".$uuid."' LIMIT 1) AS wolne, (SELECT COUNT(*) FROM orders WHERE ID_ZAMOWIENIA LIKE '".$uuid."') AS ilosc FROM orders WHERE ID_ZAMOWIENIA LIKE '".$uuid."' LIMIT 1;";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
@@ -15,16 +15,25 @@ $conn = new mysqli("localhost","root","","logitex");
         $trailer = $row["trailer"];
         $suma_wag = $row['suma_wag'];
         $ilosc = $row['ilosc'];
-        $ins = "INSERT INTO final_orders(id,id_naczepy,id_pojazdu,id_zamowienia,waga,ilosc_ladunku,data_dodania)  VALUES (DEFAULT,'$trailer','$id', '$uuid','$suma_wag','$ilosc',CURRENT_TIMESTAMP)";
+        $wolne = $row['wolne'];
+        $ins = "INSERT INTO final_orders(id,id_naczepy,id_pojazdu,id_zamowienia,waga,ilosc_ladunku,data_dodania,kubatura)  VALUES (DEFAULT,'$trailer','$id', '$uuid','$suma_wag','$ilosc',CURRENT_TIMESTAMP,'$wolne')";
         if (mysqli_query($conn, $ins) == TRUE) {
           echo "Utworzono zamówienie";
         } else {
           echo "Error: " . $ins . "<br>" . $conn->error;
         }
       }
-    } else {
+    } 
+    else 
+    {
        echo "ERROR";
     }
+    $upd = "UPDATE cars SET P_dostepnosc = 0 WHERE id = '$id'";
+      if (mysqli_query($conn, $upd) == TRUE) {
+        echo "Zablokowano naczepe";
+      } else {
+        echo "Error: " . $sql . "<br>" . $conn->error;
+      }
     $conn->close();
       
  
