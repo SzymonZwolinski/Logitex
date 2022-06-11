@@ -52,7 +52,7 @@
   </div>
     <a-scene fog  renderer="precision: low; antialias:false;" >
 
-      <a-plane static-body rotation="-90 0 0" width="8" height="2.52" color="#7BC8A4"></a-plane>
+      <a-plane static-body rotation="-90 0 0" width="8" height="3.5" color="#7BC8A4"></a-plane>
       
       <a-sky color="#ECECEC"></a-sky>
 

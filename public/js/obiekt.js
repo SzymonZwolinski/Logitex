@@ -1,6 +1,6 @@
 
 /* obsługa obiektów */
-
+// #region ustawienie globalnych zmiennych
 var obj;
 var objtab =new Array();
 waga =0;
@@ -9,6 +9,10 @@ let params = new URLSearchParams(document.location.search);
 let maksWaga = parseInt(params.get('wg'));
 let kubaturaMax = parseInt(params.get('sz')*params.get('dl'));
 let kubaturaAkt =0;
+
+// #endregion
+
+// #region Rejestracja komponentow Aframe
 
 AFRAME.registerComponent('cursor-listener', {
     init: function () {
@@ -65,11 +69,12 @@ AFRAME.registerComponent('movable', {
     
 });
 
+// #endregion
+
 
 function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma) 
 {
     
-    let akt_wg;
     
 
     if(isNaN(parseFloat(ciezar) ))
@@ -81,8 +86,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         
         ciezar =parseFloat(ciezar)+25;
     }
-    akt_wg = waga+ciezar;
-    if((maksWaga-akt_wg) >= 0)
+    if((maksWaga-(parseFloat(waga) + parseFloat(ciezar))) >= 0)
     {
         firma = firma.toString();
         if(isNaN(parseFloat(wysokosc) ) )
@@ -101,8 +105,9 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         {
             firma = generateUUID();
         }
-       kubaturaAkt = kubaturaAkt + (szerokosc*glebokosc);
-        if( (kubaturaMax - kubaturaAkt) < 0)
+       kubaturaAkt = parseFloat(kubaturaAkt) + parseFloat(szerokosc*glebokosc);
+       kubaturaAkt = kubaturaAkt.toFixed(10);
+        if( parseFloat(kubaturaMax - kubaturaAkt) < 0)
         {
             alert("Podany obiekt przekracza pojemność")
             return;
@@ -116,41 +121,49 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         {
             ciezar=ciezar+25;
         }
-        waga = waga+parseInt(ciezar);
-        //wybór obiektow
-        var scene = document.querySelector('a-scene');
-        var newObj = document.createElement('a-entity');
-        
-        //kwadrat i rozmiar
-        newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc*(0.58333333), 'depth':glebokosc*(0.58333333)});
+        if(parseFloat(maksWaga)-(parseFloat(waga) + parseFloat(ciezar)) >= 0)
+        {
+            waga = parseFloat(waga)+parseInt(ciezar);
+            //wybór obiektow
+            var scene = document.querySelector('a-scene');
+            var newObj = document.createElement('a-entity');
+            
+            //kwadrat i rozmiar
+            newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': (szerokosc*(0.58333333)), 'depth':(glebokosc*(0.58333333))});
 
-        //parametry
-        newObj.setAttribute('click-drag','');
-        newObj.setAttribute('dynamic-body','mass:90000');
-        newObj.setAttribute('material','color','blue');
-        newObj.setAttribute('position',{x:0, y:0.4, z:0});
-        newObj.setAttribute('movable','');
-        newObj.setAttribute('id',incr());
-        newObj.setAttribute('collider','');
-        newObj.setAttribute('weight', ciezar    );
-        newObj.setAttribute('name',firma);
+            //parametry
+            newObj.setAttribute('click-drag','');
+            newObj.setAttribute('dynamic-body','mass:90000');
+            newObj.setAttribute('material','color','blue');
+            newObj.setAttribute('position',{x:0, y:0.4, z:1.5});
+            newObj.setAttribute('movable','');
+            newObj.setAttribute('id',incr());
+            newObj.setAttribute('collider','');
+            newObj.setAttribute('weight', ciezar    );
+            newObj.setAttribute('name',firma);
 
-        //dodanie do sceny
-        scene.appendChild(newObj);
-        document.getElementById('kubatur').value = kubaturaMax-kubaturaAkt;
+            //dodanie do sceny
+            scene.appendChild(newObj);
+            document.getElementById('kubatur').value =parseFloat( kubaturaMax-kubaturaAkt);
+
+        }
+        else
+        {
+            alert("dodanie europalet przekracza limit obciazenia");
+        }
     }
     else
     {
-        alert("Za duże obciążenie naczepy o "+ Math.abs(maksWaga-(akt_wg))+" Kg");
+        alert("Za duże obciążenie naczepy o "+ Math.abs(maksWaga-(waga))+" Kg");
     }
 
   
 }
 function weightCh()
 {
-    alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg");
+    alert("Aktualna waga wynosi "+waga+" Kg" +"/"+maksWaga+" Kg" );
 }
-
+// #region load
 function weigthLoad()
 {
     let params = new URLSearchParams(document.location.search);
@@ -158,6 +171,8 @@ function weigthLoad()
     waga = params.get('akwg');
    
 }
+
+
 function wait_toload()
 {
     var readyStateCheckInterval = setInterval(function()
@@ -270,7 +285,7 @@ function obj_cr(geo, pos, n, w)
     //wybór obiektow
     var scene = document.querySelector('a-scene');
     var newObj = document.createElement('a-entity');
-
+    
     newObj.setAttribute('geometry',{'primitive':'box','height':myHeight,'width':myWidth,'depth':myDepth});
 
     newObj.setAttribute('click-drag','');
@@ -282,21 +297,28 @@ function obj_cr(geo, pos, n, w)
     newObj.setAttribute('movable','');
     newObj.setAttribute('id',incr());
     newObj.setAttribute('collider','');
+
+    kubaturaAkt = kubaturaAkt + (myWidth * myDepth);
+    document.getElementById('kubatur').value = kubaturaMax-kubaturaAkt;
+
     //dodanie do sceny
     scene.appendChild(newObj);
 }
+// #endregion
 
-
+// #region DelObj, ChObj, EditObj
 function DelObject(objID)
 {
-    console.log(objID);
     var scene = document.querySelector('a-scene');
     var rmObj = document.getElementById(objID);
     if(rmObj!=null)
     {
-        console.log(rmObj);
         waga = waga - rmObj.getAttribute('weight');
-        
+        kubaturaAkt = (kubaturaAkt -((rmObj.getAttribute('geometry').width/(0.58333333) )* (rmObj.getAttribute('geometry').depth/(0.58333333))));
+        kubaturaAkt = kubaturaAkt.toFixed(10);
+        console.log(kubaturaAkt);
+        document.getElementById('kubatur').value = parseFloat(kubaturaMax)-parseFloat(kubaturaAkt);
+
         scene.removeChild(rmObj);
     }
     else
@@ -351,7 +373,12 @@ function EditObject(objID,wysokosc,szerokosc,glebokosc)
 
         if(chck == true)
         {
-            editObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': szerokosc, 'depth':glebokosc});
+            kubaturaAkt = parseFloat(kubaturaAkt) - (editObj.getAttribute('geometry').width/(0.58333333)*(editObj.getAttribute('geometry').depth/(0.58333333)));
+            editObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': (szerokosc*(0.58333333)), 'depth':(glebokosc*(0.58333333))});
+            kubaturaAkt = kubaturaAkt + (szerokosc*glebokosc);
+            kubaturaAkt = kubaturaAkt.toFixed(10);
+            document.getElementById('kubatur').value = kubaturaMax-kubaturaAkt;
+
         }
     }
     else
@@ -359,7 +386,9 @@ function EditObject(objID,wysokosc,szerokosc,glebokosc)
         alert("Brak obiektu do edycji!");
     }
 }
+// #endregion
 
+// #region move, koliza, save
 function move()
 {
     var draggable = document.querySelectorAll('[click-drag]');
@@ -476,6 +505,9 @@ function save()
 
    
 }
+// #endregion
+
+// #region funkcje pomocnicze 
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -508,3 +540,5 @@ function generateUUID() { // Public Domain/MIT
         return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
     });
 }
+
+// #endregion
