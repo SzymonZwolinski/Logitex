@@ -61,13 +61,13 @@
       Pozostałe miejsce (m^2): <input type="value" id="kubatur" name="kubatura"   disabled>
     </div>   
   </div>
-    <a-scene fog  renderer="precision: low; antialias:false;" >
+    <a-scene fog  renderer="precision: low; antialias:false;"  vr-mode-ui="enabled: false">
 
     <a-plane static-body rotation="-90 0 0" width="8" height="2.52" color="#7BC8A4"></a-plane>
       <a-sky color="#ECECEC"></a-sky>
 
       <a-entity position="0 1 3.8">
-        <a-entity cam1 camera="active: true" look-controls-enabled="true"
+        <a-entity position="0 0.20 0" cam1 camera="active: true" look-controls-enabled="true"
          keyboard-controls="fpsMode: true" dynamic-body >
         <a-entity cursor="fuse: true; fuseTimeout: 500"
             position="0 0 -1"

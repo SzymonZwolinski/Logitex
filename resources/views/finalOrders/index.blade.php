@@ -1,4 +1,4 @@
-@extends('orders.layout')
+@extends('finalOrders.layout')
 @section('content')
 <head>
     <!-- Head Contents -->
@@ -9,7 +9,7 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Laravel 9 Crud</h2>
+                        <h2>Aktualne zamówienia</h2>
                     </div>
                     
                         <br/>
@@ -48,7 +48,6 @@
                                        
                                         <td>
 
-                                            <a href="{{ url('/orders/' . $item->id) }}" title="View order"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
                                             <form method="POST" action="{{ url('/orders' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
