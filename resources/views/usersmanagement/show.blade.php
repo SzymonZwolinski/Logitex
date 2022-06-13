@@ -18,3 +18,4 @@
   
   </div>
 </div>
+<a href="{{url('/')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do menu</button></a>

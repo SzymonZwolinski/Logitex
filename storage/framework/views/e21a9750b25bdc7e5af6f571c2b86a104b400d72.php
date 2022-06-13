@@ -73,5 +73,7 @@
         </div>
     </div>
 </body>
+<a href="<?php echo e(url('/')); ?>"><button type="button" name="nawrota" value="nawrota" >Powrót do menu</button></a>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('trailers.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\xamp\htdocs\Logitex\resources\views/trailers/index.blade.php ENDPATH**/ ?>

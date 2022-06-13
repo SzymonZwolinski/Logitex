@@ -16,7 +16,8 @@
         <input type="number" name="P_dostepnosc" id="P_dostepnosc" class="form-control"></br>
         <input type="submit" value="Dodaj" class="btn btn-success"></br>
     </form>
-  
+    <a href="{{url('/')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do menu</button></a>
+
   </div>
 </div>
 @stop

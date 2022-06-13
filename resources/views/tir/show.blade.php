@@ -15,3 +15,4 @@
   
   </div>
 </div>
+<a href="{{url('/tir')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do wyboru tirów</button></a>
