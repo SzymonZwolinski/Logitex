@@ -27,17 +27,26 @@ class Admin
 
     }
     */
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
+        }
+    }
 
     public function handle($request)
     {
-        if (Auth::user()->type == 0) {
+        if (Auth::user()->type == 0 ) {
             return response()->view('user');
+        }elseif((Auth::user()->type == NULL )) {
+            return route('login');
         }else{
             return response()->view('dashboard');
+            
         }
-
-
+            
     }
+    
   
 }
 
