@@ -9,7 +9,7 @@
         <label>Id zamówienia -> nadawca</label>
         <select name="cars" id="cars">
           @foreach($data as $item)
-          <option value="{{$item->nadawca}}">{{$item->ID_ZAMOWIENIA}} -> {{$item->nadawca}}</option>
+          <option value="{{$item->nadawca}}" name="nadawca" id="nadawca">{{$item->ID_ZAMOWIENIA}} -> {{$item->nadawca}}</option>
           @endforeach
         </select>
         <br>

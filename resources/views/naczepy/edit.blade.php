@@ -28,4 +28,6 @@
   
   </div>
 </div>
+<a href="{{url('/naczepy')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do wyboru naczep</button></a>
+
 @stop

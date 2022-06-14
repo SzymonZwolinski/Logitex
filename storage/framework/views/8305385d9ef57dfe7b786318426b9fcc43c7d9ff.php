@@ -1,4 +1,3 @@
-
 <?php $__env->startSection('content'); ?>
 <div class="card">
   <div class="card-header">Podgląd informacji o naczepie</div>
@@ -18,4 +17,6 @@
   
   </div>
 </div>
+<a href="<?php echo e(url('/trailers')); ?>"><button type="button" name="nawrota" value="nawrota" >Powrót do wyboru naczep</button></a>
+
 <?php echo $__env->make('trailers.layout', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH F:\xamp\htdocs\Logitex\resources\views/trailers/show.blade.php ENDPATH**/ ?>
