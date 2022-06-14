@@ -91,7 +91,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
         firma = firma.toString();
         if(isNaN(parseFloat(wysokosc) ) )
         {
-            wysokosc=1.2;
+            wysokosc=2;
         }
         if(isNaN(parseFloat(szerokosc) ))
         {

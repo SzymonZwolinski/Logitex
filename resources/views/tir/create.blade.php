@@ -4,7 +4,7 @@
   <div class="card-header">Dodaj nowy pojazd</div>
   <div class="card-body">
       
-      <form action="{{ url('cars/') }}" method="post">
+      <form action="{{ url('tir/') }}" method="post">
         {!! csrf_field() !!}
         <label>marka</label></br>
         <input type="text" name="marka" id="marka" class="form-control"></br>

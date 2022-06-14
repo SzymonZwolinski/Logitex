@@ -1,10 +1,10 @@
 @extends('naczepy.layout')
 @section('content')
 <div class="card">
-  <div class="card-header">orders Page</div>
+  <div class="card-header">Dodaj naczepe</div>
   <div class="card-body">
       
-      <form action="{{ url('orders/') }}" method="post">
+      <form action="{{ url('naczepy/') }}" method="post">
         {!! csrf_field() !!}
         <label>kubatura</label></br>
         <input type="number" name="kubatura" id="kubatura" class="form-control"></br>
