@@ -9,7 +9,9 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Lista pojazdów w firmie</h2>
+                        <h1>Zamówienie zapisano</h1>
+                        <h2>Kreator zamówień</h2>
+						<h3>Krok 3: Wybierz tir</h3>
                     </div>
 
                         <br/>
@@ -37,7 +39,7 @@
 
                                     $tir = DB::table('cars')
                                     ->selectRaw('id, marka, model, dopuszczalna_masa, (select suma_wag from orders where ID_ZAMOWIENIA = :somevariable limit 1 ) as aktualna_masa',array('somevariable'=> $components))
-                                    ->whereRaw('(dopuszczalna_masa >= (select waga from orders order by id desc limit 1)) AND P_dostepnosc =1')
+                                    ->whereRaw('(dopuszczalna_masa >= (select suma_wag from orders order by id desc limit 1)) AND P_dostepnosc =1')
                                     ->get();
                                     }}</div>
                                     <?php $components = '"'.$components.'"';?>
@@ -52,13 +54,7 @@
                                         <td>
                                         
                                            <button type="button" name="wybierz" value="wybierz" onclick="zapis({{$item->id}},{{ $components }})">Wybierz</button>
-                                            <a href="{{ url('/cars/' . $item->id) }}" title="View Vehicle"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Podgląd</button></a>
-                                            <a href="{{ url('/cars/' . $item->id . '/edit') }}" title="Edit Vehicle"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edytuj</button></a>
-                                            <form method="POST" action="{{ url('/vehicle' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Vehicle" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
-                                            </form>
+                                           
                                         </td>
                                     </tr>
                                 @endforeach
@@ -70,4 +66,6 @@
             </div>
         </div>
     </div>
+    <a href="{{url('/')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do menu</button></a>
+
 @endsection

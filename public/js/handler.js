@@ -21,6 +21,8 @@ function zapis(id,uuid)
     
     sleep(3000).then(() =>{location.replace("/final_order_location/show?&uuid="+uuid);
      });
+     
+     
 }
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));

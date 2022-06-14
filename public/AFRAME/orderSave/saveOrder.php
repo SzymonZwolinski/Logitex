@@ -2,11 +2,11 @@
 <?php 
  
 
-function save($_uuid,$nadawca,$ladunek,$waga,$sumWaga,$trailer)
+function save($_uuid,$nadawca,$ladunek,$waga,$sumWaga,$trailer,$kubatura)
 {
   $conn = new mysqli("localhost","root","","logitex");
         
-  $sql = "INSERT INTO orders  VALUES (default,'$_uuid','$nadawca','$ladunek', '$waga','$sumWaga','$trailer')";
+  $sql = "INSERT INTO orders  VALUES (default,'$_uuid','$nadawca','$ladunek', '$waga','$sumWaga','$trailer','$kubatura')";
   $upd = "UPDATE trailers SET dostepnosc = 0 WHERE '$trailer' = id";
   if (mysqli_query($conn, $sql) == TRUE) {
       echo "Utworzono zamówienie";
@@ -22,7 +22,9 @@ function save($_uuid,$nadawca,$ladunek,$waga,$sumWaga,$trailer)
 }
     $ladunek = file_get_contents("php://input");
     $obj = json_decode($ladunek);
-  
+
+    $kubatura = end($obj);
+    array_pop($obj);
     $uuid = end($obj);
     array_pop($obj);
     $trailer = end($obj);
@@ -36,7 +38,7 @@ function save($_uuid,$nadawca,$ladunek,$waga,$sumWaga,$trailer)
       $koniecNazwa = strpos($data,"W");
       $Nazwa = substr($data,$startNazwa+3,($koniecNazwa-$startNazwa)-4);
       $Waga = substr($data,$koniecNazwa+3,-1);
-      save($uuid,$Nazwa,$data,$Waga,$waga,$trailer);
+      save($uuid,$Nazwa,$data,$Waga,$waga,$trailer,$kubatura);
     }
 
 

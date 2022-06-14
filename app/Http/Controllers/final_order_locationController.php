@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use  App\Models\final_order_location;
-use App\Models\final_orders; 
+use App\Models\Order; 
 class final_order_locationController extends Controller
 {
 
@@ -21,14 +21,16 @@ class final_order_locationController extends Controller
 
     public function index()
     {
-        
-        return view ('final_order_location.create')->with('flash_message', 'Dodano kraj oraz miasto!');
+        $data = Order::all();
+
+        return view ('final_order_location.create')->with('data',$data);
     }
    
     
     public function create()
     {
-        return view('final_order_location.create');
+        $data = Order::all();
+        return view('final_order_location.create')->with('data',$data);
     }
   
     public function store(Request $request)

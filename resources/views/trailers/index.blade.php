@@ -10,7 +10,8 @@
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header">
-                        <h2>Lista naczep w firmie</h2>
+                        <h2>Kreator zamówień</h2>
+						<h3>Krok 1: Wybierz naczepę</h3>
                     </div>
                     
                         <br/>
@@ -52,12 +53,7 @@
                                             <input type="button" value="Wybierz" onclick=" loadtrailer({{$item->id}},{{ $item->szerokosc}},{{ $item->dlugosc}},{{ $item->wysokosc }},{{ $item->waga }} )">
 
                                             <a href="{{ url('/trailers/' . $item->id) }}" title="View Trailer"><button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> View</button></a>
-                                            <a href="{{ url('/trailers/' . $item->id . '/edit') }}" title="Edit Trailer"><button class="btn btn-primary btn-sm"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Edit</button></a>
-                                            <form method="POST" action="{{ url('/trailers' . '/' . $item->id) }}" accept-charset="UTF-8" style="display:inline">
-                                                {{ method_field('DELETE') }}
-                                                {{ csrf_field() }}
-                                                <button type="submit" class="btn btn-danger btn-sm" title="Delete Trailer" onclick="return confirm(&quot;Confirm delete?&quot;)"><i class="fa fa-trash-o" aria-hidden="true"></i> Usuń</button>
-                                            </form>
+                                            
                                         </td>
                                     </tr>
                                 @endforeach
@@ -70,4 +66,6 @@
         </div>
     </div>
 </body>
+<a href="{{url('/')}}"><button type="button" name="nawrota" value="nawrota" >Powrót do menu</button></a>
+
 @endsection
