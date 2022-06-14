@@ -32,9 +32,7 @@
                     <?php else: ?>
                         <a href="<?php echo e(route('login')); ?>" class="text-sm text-gray-700 dark:text-gray-500 underline">Zaloguj się</a>
 
-                        <?php if(Route::has('register')): ?>
-                            <a href="<?php echo e(route('register')); ?>" class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Zarejestruj się</a>
-                        <?php endif; ?>
+                        
                     <?php endif; ?>
                 </div>
             <?php endif; ?>
