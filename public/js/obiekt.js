@@ -129,7 +129,7 @@ function AddObject(wysokosc,szerokosc,glebokosc,ciezar,firma)
             var newObj = document.createElement('a-entity');
             
             //kwadrat i rozmiar
-            newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc, 'width': (szerokosc*(0.58333333)), 'depth':(glebokosc*(0.58333333))});
+            newObj.setAttribute('geometry',{'primitive': 'box', 'height': wysokosc*(0.58333333), 'width': (szerokosc*(0.58333333)), 'depth':(glebokosc*(0.58333333))});
 
             //parametry
             newObj.setAttribute('click-drag','');
@@ -338,7 +338,7 @@ function ChObject(objID)
        var depth = chObj.getAttribute('geometry').depth;
        var nadawca = chObj.getAttribute('name');
        var weight = chObj.getAttribute('weight');
-       alert("\nWysokość: "+ height*(0.58333333) +"\nSzerokość: "+ width*(0.58333333)+"\nGłębokość: " +depth*(0.58333333) + "\nWaga: " + weight + '\nNadawca: "' + nadawca+'"');
+       alert("\nWysokość: "+ height/(0.58333333) +"\nSzerokość: "+ width/(0.58333333)+"\nGłębokość: " +depth/(0.58333333) + "\nWaga: " + weight + '\nNadawca: "' + nadawca+'"');
        
     }
     else
