@@ -20,6 +20,7 @@
                                     <tr>
                                         <th>#</th>
                                         <th>name</th>
+                                        <th>nazwisko</th>
                                         <th>email</th>
                                         <th>type</th>
                                     </tr>
@@ -29,6 +30,7 @@
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $item->name }}</td>
+                                        <td>{{ $item->nazwisko }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->type }}</td>
  

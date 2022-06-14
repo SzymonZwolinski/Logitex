@@ -44,11 +44,12 @@ class UsersManagementController extends Controller
         $input = $request->all();
         UsersManagement::create([
             'name' => $input['name'],
+            'nazwisko' => $input['nazwisko'],
             'email' => $input['email'],
             'type' =>$input['type'],
             'password' => Hash::make($input['password']),
         ]);
-        return redirect('usermanagement')->with('flash_message', 'User dodany');  
+        return redirect('usersmanagement')->with('flash_message', 'User dodany');  
     }
     
     public function show($id)
