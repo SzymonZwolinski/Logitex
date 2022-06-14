@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\UsersManagement;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Hash;
+
 
 class UsersManagementController extends Controller
 {
@@ -40,8 +42,14 @@ class UsersManagementController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
-        UsersManagement::create($input);
-        return redirect('usermanagement')->with('flash_message', 'User dodany');  
+        UsersManagement::create([
+            'name' => $input['name'],
+            'nazwisko' => $input['nazwisko'],
+            'email' => $input['email'],
+            'type' =>$input['type'],
+            'password' => Hash::make($input['password']),
+        ]);
+        return redirect('usersmanagement')->with('flash_message', 'User dodany');  
     }
     
     public function show($id)
