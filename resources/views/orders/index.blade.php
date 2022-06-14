@@ -27,6 +27,7 @@
                                         <th>szerokosc</th>
                                         <th>dlugosc</th>
                                         <th>wysokosc</th>
+                                        <th>nadawcy</th>
 
                                     </tr>
                                 </thead>
@@ -36,7 +37,7 @@
                                         <div style="display: none">
                                  
                                         {{$data = DB::table('orders as o')
-                                ->selectRaw('o.id, o.trailer, o.ID_ZAMOWIENIA, o.suma_wag,o.kubatura, t.szerokosc, t.dlugosc, t.wysokosc, GROUP_CONCAT(o.ladunek) AS ladunek, t.waga')
+                                ->selectRaw('o.id, o.trailer, o.ID_ZAMOWIENIA, o.suma_wag,o.kubatura, t.szerokosc, t.dlugosc, t.wysokosc, GROUP_CONCAT(o.ladunek)AS ladunek,GROUP_CONCAT(o.nadawca) as nadawcy , t.waga')
                                 ->join('trailers as t', 'o.trailer', '=', 't.id')->groupBy('o.ID_ZAMOWIENIA')
                                 ->get();
                                 }}
@@ -52,6 +53,7 @@
                                         <td>{{ $item->szerokosc }}</td>
                                         <td>{{ $item->dlugosc }}</td>
                                         <td>{{ $item->wysokosc }}</td>
+                                        <td>{{ $item->nadawcy }}</td>
                                         <div style="display: none">{{ $item->waga }}</div>
                                         <div style="display: none">{{$item ->ladunek}}</div>
                                         <td>
