@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\DashboardController;
 
 
 /*
@@ -41,13 +42,14 @@ Route::get('/user', function () {
     return view('user');
 })->middleware(['auth'])->name('user');
 */
+
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['Admin'])->name('dashboard');
 
 Route::get('/user', function () {
     return view('user');
-})->middleware(['auth'])->name('user');
+})->middleware(['Admin'])->name('user');
 
 
 /*Route::get('/trailers', function () {
@@ -68,6 +70,7 @@ Route::resource('/usersmanagement', App\Http\Controllers\UsersManagementControll
 
 require __DIR__.'/auth.php';
 Route::resource('/naczepy', App\Http\Controllers\naczepaController::class);
+
 Route::resource('/tir', App\Http\Controllers\tirController::class);
 
 Route::resource('/orders', App\Http\Controllers\OrderController::class);

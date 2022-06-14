@@ -15,14 +15,31 @@ class Admin
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next)
+    /*
+    public function handle($request)
     {
-
-        if(!Auth::guard('admin'->check())){
-            return redirect()->route('login_from')->with('error', 'Musisz byc zalogowany');
-
+        if (Auth::user()->type == 0) {
+            return redirect('user');
+        }else{
+            return redirect('dashboard');
         }
 
-        return $next($request);
+
     }
+    */
+
+    public function handle($request)
+    {
+        if (Auth::user()->type == 0) {
+            return response()->view('user');
+        }else{
+            return response()->view('dashboard');
+        }
+
+
+    }
+  
 }
+
+
+
